@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VoyageX - Comprehensive Project Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap');
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 11pt;
+  }
+
+  /* Cover / Header section */
+  .cover {
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+  }
+
+  .badge-header {
+    display: inline-block;
+    background: #0f172a;
+    color: #38bdf8;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26pt;
+    color: #0f172a;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13pt;
+    color: #475569;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 9pt;
+  }
+
+  .meta-item strong {
+    display: block;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+  }
+
+  .meta-item span {
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 15pt;
+    color: #0f172a;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-top: 26px;
+    margin-bottom: 14px;
+    page-break-after: avoid;
+    display: flex;
+    align-items: center;
+  }
+
+  h2::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 18px;
+    background: #2563eb;
+    border-radius: 2px;
+    margin-right: 8px;
+  }
+
+  h3 {
+    font-size: 12pt;
+    color: #1e293b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: #334155;
+    text-align: justify;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 9pt;
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f8fafc;
+  }
+
+  /* Status Badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+  .badge-success { background: #dcfce7; color: #15803d; }
+  .badge-primary { background: #dbeafe; color: #1d4ed8; }
+  .badge-purple  { background: #f3e8ff; color: #7e22ce; }
+
+  /* Task Cards */
+  .task-card {
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #2563eb;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: #ffffff;
+    page-break-inside: avoid;
+  }
+
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .task-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .task-desc {
+    font-size: 9.5pt;
+    color: #475569;
+    margin-bottom: 6px;
+  }
+
+  .task-list {
+    margin-left: 18px;
+    font-size: 9pt;
+    color: #334155;
+  }
+
+  .task-list li {
+    margin-bottom: 3px;
+  }
+
+  /* Architecture & Box Callouts */
+  .callout {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #16a34a;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 9.5pt;
+    color: #166534;
+  }
+
+  .callout-blue {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-left: 4px solid #0284c7;
+    color: #0369a1;
+  }
+
+  .code-pill {
+    font-family: Consolas, monospace;
+    font-size: 8.5pt;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .footer-note {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 8pt;
+    color: #94a3b8;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <!-- COVER / HEADER -->
+  <div class="cover">
+    <div class="badge-header">VOYAGEX TRAVEL PLATFORM &bull; PROJECT REPORT</div>
+    <h1>Comprehensive Project Implementation Report</h1>
+    <div class="subtitle">Design, Implementation, Security, Containerization & Continuous Deployment</div>
+    
+    <div class="meta-grid">
+      <div class="meta-item">
+        <strong>Author / Developer</strong>
+        <span>Harshitha R N</span>
+      </div>
+      <div class="meta-item">
+        <strong>Framework & Language</strong>
+        <span>Spring Boot 4.x &bull; Java 25</span>
+      </div>
+      <div class="meta-item">
+        <strong>Deployment Cloud</strong>
+        <span>Render (Docker Web Service)</span>
+      </div>
+      <div class="meta-item">
+        <strong>GitHub Repository</strong>
+        <span>HarshithaR-cyber/voyagex-travelbooking</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: EXECUTIVE SUMMARY -->
+  <h2>1. Executive Summary</h2>
+  <p>
+    <strong>VoyageX</strong> is a modern, enterprise-grade travel and hospitality platform engineered to deliver an integrated travel booking journey encompassing flight discovery, dynamic seat map selection, luxury stays reservation, VIP holiday packages, automated cancellations, and real-time traveler reviews.
+  </p>
+  <p>
+    The platform is built on an enterprise <strong>Java 25 (LTS)</strong> backend powered by <strong>Spring Boot 4.x</strong> and <strong>Spring Data JPA</strong> with an embedded <strong>H2 Database</strong>. The frontend features a lightweight, high-performance, glassmorphic interface built using modern <strong>HTML5, Vanilla CSS3, and ES6+ JavaScript</strong>. For cloud reliability, the project is packaged into a production-ready multi-stage <strong>Docker container</strong> with automated Continuous Integration & Continuous Deployment (CI/CD) hosted on <strong>Render</strong>.
+  </p>
+
+  <div class="callout callout-blue">
+    <strong>Live Deployment URL:</strong> <a href="https://voyagex-travelbooking.onrender.com" style="color:#0284c7; text-decoration:none; font-weight:bold;">https://voyagex-travelbooking.onrender.com</a><br>
+    <strong>GitHub Source Code:</strong> <a href="https://github.com/HarshithaR-cyber/voyagex-travelbooking" style="color:#0284c7; text-decoration:none; font-weight:bold;">https://github.com/HarshithaR-cyber/voyagex-travelbooking</a>
+  </div>
+
+  <!-- SECTION 2: COMPLETE IMPLEMENTATION TASKS -->
+  <h2>2. Detailed Task Completion Breakdown</h2>
+  <p>
+    The following matrix documents all modules, security workflows, and architectural enhancements engineered throughout the project lifecycle:
+  </p>
+
+  <!-- TASK 1 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 1: Mandatory Authentication Gateway & Auth Guard</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Engineered a complete security gating system ensuring visitors must authenticate before entering the VoyageX main portal.</div>
+    <ul class="task-list">
+      <li><strong>Initial Screen Gating:</strong> Root route (<span class="code-pill">/</span>) automatically directs unauthenticated visitors to <span class="code-pill">login.html</span> before homepage access.</li>
+      <li><strong>Modern Travel-Themed UI:</strong> Designed a responsive, glassmorphic authentication interface consistent with VoyageX branding.</li>
+      <li><strong>Tabbed Authentication Workflow:</strong> Seamless switching between <em>Sign In</em>, <em>Create Account</em>, and <em>Forgot Password</em> forms.</li>
+      <li><strong>Client & Server Validation:</strong> Real-time email syntax regex, password strength checks, and feedback alerts.</li>
+      <li><strong>SessionTokenService:</strong> Cryptographically secure session token generation and server-side validation (<span class="code-pill">/api/auth/verify-session</span>).</li>
+      <li><strong>Dynamic Navbar Integration:</strong> Navbar displays authenticated traveler's name, avatar, and active status.</li>
+      <li><strong>Server-Side Logout:</strong> Immediate session revocation on sign-out, clearing client state and returning users to login.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 2 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 2: Flight Search, Dynamic Pricing & Availability Engine</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Comprehensive flight booking search supporting dynamic origin/destination queries, cabin class tiers, and fare calculation.</div>
+    <ul class="task-list">
+      <li><strong>Multi-Criteria Search:</strong> Origin, destination airport lookup, departure & return dates, passenger counter.</li>
+      <li><strong>Cabin Class Multipliers:</strong> Economy, Premium Economy, Business, and First Class fare structures.</li>
+      <li><strong>Dynamic Pricing Service:</strong> Live price adjustment algorithms calculating taxes, fees, and real-time flight demand.</li>
+      <li><strong>Price Freeze Feature:</strong> Locks quoted flight prices for 48 hours for a small holding fee.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 3 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 3: Interactive Aircraft Cabin Seat Selection</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Interactive 2D aircraft seating layout enabling passengers to visually choose their preferred seats.</div>
+    <ul class="task-list">
+      <li><strong>Visual Seat Grid:</strong> Real-time visualization of window, middle, and aisle seats.</li>
+      <li><strong>Live State Indicators:</strong> Clear distinction between available, selected, occupied, and extra-legroom seats.</li>
+      <li><strong>Booking Integration:</strong> Selected seat numbers are attached to the passenger's confirmed reservation PNR.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 4 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 4: Live Flight Status & Tracking Tracker</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Real-time status inquiry for scheduled flights across global departure and arrival gates.</div>
+    <ul class="task-list">
+      <li><strong>Flight Number Query:</strong> Real-time lookup for commercial flight numbers (e.g., VX-101, VX-204).</li>
+      <li><strong>Operational Metadata:</strong> Live reporting on status (On-Time, Boarding, In-Air, Delayed), terminal gates, and baggage carousels.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 5 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 5: Hotel Recommendations & Interactive Stays</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Hotel discovery and room booking system with personalized filters and amenities.</div>
+    <ul class="task-list">
+      <li><strong>Property Discovery:</strong> Search top accommodations across Paris, Tokyo, Bali, New York, and Dubai.</li>
+      <li><strong>Amenity Badges:</strong> Visual amenity tags for High-Speed Wi-Fi, Swimming Pools, Fitness Centers, and Fine Dining.</li>
+      <li><strong>Room Tier Selection:</strong> Interactive room booking modal with real-time room breakdown and instant confirmation codes.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 6 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 6: VIP Deals & Curated Luxury Travel Packages</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Premium all-inclusive vacation bundles offering flight + hotel packages with exclusive member savings.</div>
+    <ul class="task-list">
+      <li><strong>Category Filter Tabs:</strong> Quick filtering across Tropical, European, Urban, and Mountain getaways.</li>
+      <li><strong>VIP Perks Highlight:</strong> Dedicated badge highlights for complimentary airport chauffeur, free breakfast, and flexible dates.</li>
+      <li><strong>One-Click Package Booking:</strong> Direct checkout with promotional bundle discounts applied.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 7 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 7: Booking Cancellation & Transparent Refund Engine</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Fair and automated cancellation system calculating instant refund values based on departure timeline.</div>
+    <ul class="task-list">
+      <li><strong>Automated Refund Calculator:</strong> Transparent tiered deductions based on cancellation lead time.</li>
+      <li><strong>Instant Processing:</strong> Issues official cancellation receipts with transaction tracking IDs.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 8 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 8: Traveler Reviews & Community Ratings System</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Community-driven traveler review system providing ratings and traveler feedback.</div>
+    <ul class="task-list">
+      <li><strong>Verified Feedback Display:</strong> Dynamic rendering of recent passenger testimonials and star ratings.</li>
+      <li><strong>Review Submission Modal:</strong> Form validation for submitting traveler feedback on hotels and airlines.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 9 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 9: Cloud Dynamic Port & Docker Containerization</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Engineered multi-stage containerization to achieve standard execution across local and cloud environments.</div>
+    <ul class="task-list">
+      <li><strong>Dynamic Port Configuration:</strong> Configured <span class="code-pill">server.port=${PORT:8080}</span> to bind dynamically to cloud-assigned environment ports.</li>
+      <li><strong>Multi-Stage Dockerfile:</strong> Stage 1 builds the JAR with <span class="code-pill">eclipse-temurin:25-jdk</span>; Stage 2 packages a slim runtime with non-root security.</li>
+      <li><strong>Optimized .dockerignore:</strong> Excluded unnecessary build files, git histories, and local IDE configs.</li>
+    </ul>
+  </div>
+
+  <!-- TASK 10 -->
+  <div class="task-card">
+    <div class="task-header">
+      <span class="task-title">Task 10: Git Repository, GitHub Push & Continuous Deployment</span>
+      <span class="badge badge-success">COMPLETED</span>
+    </div>
+    <div class="task-desc">Full version control tracking and cloud automation via GitHub and Render.</div>
+    <ul class="task-list">
+      <li><strong>Git Repository Setup:</strong> Initialized clean Git tree on branch <span class="code-pill">main</span> with proper ignore policies.</li>
+      <li><strong>Published to GitHub:</strong> Pushed all source files to <span class="code-pill">HarshithaR-cyber/voyagex-travelbooking</span>.</li>
+      <li><strong>Automated Render CI/CD:</strong> Connected Render web service to auto-deploy every commit with zero manual intervention.</li>
+      <li><strong>Comprehensive Documentation:</strong> Delivered production-grade <span class="code-pill">README.md</span> and project reports.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 3: SYSTEM ARCHITECTURE & API -->
+  <h2>3. System Architecture & REST API Specifications</h2>
+  <p>
+    VoyageX is structured using Spring Boot's clean Controller-Service-Repository layered architecture:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 12%;">Method</th>
+        <th style="width: 32%;">Endpoint</th>
+        <th style="width: 26%;">Module</th>
+        <th style="width: 30%;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/auth/login</span></td>
+        <td>Authentication</td>
+        <td>Validates credentials & returns session token</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/auth/register</span></td>
+        <td>Authentication</td>
+        <td>Registers traveler account with validation</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-success">GET</span></td>
+        <td><span class="code-pill">/api/auth/verify-session</span></td>
+        <td>Authentication</td>
+        <td>Validates active session token</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/auth/logout</span></td>
+        <td>Authentication</td>
+        <td>Revokes session token server-side</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/auth/forgot-password</span></td>
+        <td>Authentication</td>
+        <td>Handles password reset requests</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/flights/search</span></td>
+        <td>Flights</td>
+        <td>Searches available flights by criteria</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-success">GET</span></td>
+        <td><span class="code-pill">/api/flights/status/{flightNo}</span></td>
+        <td>Flights</td>
+        <td>Retrieves live flight tracking information</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/bookings/flight</span></td>
+        <td>Bookings</td>
+        <td>Confirms passenger reservation with seat</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-success">GET</span></td>
+        <td><span class="code-pill">/api/hotels/recommendations</span></td>
+        <td>Hotels</td>
+        <td>Fetches lodging recommendations by city</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/hotels/book</span></td>
+        <td>Hotels</td>
+        <td>Reserves room with confirmation code</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-success">GET</span></td>
+        <td><span class="code-pill">/api/vip-deals</span></td>
+        <td>VIP Packages</td>
+        <td>Fetches curated travel packages</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-primary">POST</span></td>
+        <td><span class="code-pill">/api/cancellations/quote</span></td>
+        <td>Cancellations</td>
+        <td>Calculates instant refund quote</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 4: VERIFICATION & TESTING -->
+  <h2>4. Verification & Quality Assurance</h2>
+  <p>
+    The platform underwent comprehensive validation to ensure stability, security, and responsive UI rendering:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Test Case ID</th>
+        <th style="width: 45%;">Verification Scope</th>
+        <th style="width: 15%;">Environment</th>
+        <th style="width: 15%;">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>VAL-AUTH-01</strong></td>
+        <td>Unauthenticated redirect to <span class="code-pill">/login.html</span></td>
+        <td>Integration</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-AUTH-02</strong></td>
+        <td>Duplicate registration check & password hashing</td>
+        <td>Unit / Service</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-AUTH-03</strong></td>
+        <td>Session token generation and lifecycle verification</td>
+        <td>Unit / Service</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-FLIGHT-01</strong></td>
+        <td>Flight search criteria filtering & cabin class pricing</td>
+        <td>API / Controller</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-SEAT-01</strong></td>
+        <td>Interactive seat selection state toggle and assignment</td>
+        <td>Frontend E2E</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-HOTEL-01</strong></td>
+        <td>City-based lodging search & room booking</td>
+        <td>API / Controller</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-DEAL-01</strong></td>
+        <td>VIP package filtering by tropical, European, urban tags</td>
+        <td>API / Controller</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-DOCKER-01</strong></td>
+        <td>Multi-stage container compilation and minimal JRE image</td>
+        <td>Docker Engine</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+      <tr>
+        <td><strong>VAL-DEPLOY-01</strong></td>
+        <td>Dynamic PORT binding & continuous deployment rollout</td>
+        <td>Render Cloud</td>
+        <td><span class="badge badge-success">PASS</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 5: CONCLUSION -->
+  <h2>5. Conclusion</h2>
+  <p>
+    The VoyageX travel booking platform successfully meets all architectural, functional, and security objectives. By combining the enterprise capabilities of <strong>Java 25 and Spring Boot</strong> with an intuitive, dynamic frontend and <strong>cloud-native Docker deployment</strong>, the platform delivers a reliable and modern user experience. The integrated GitHub repository and Render CI/CD pipeline ensure that future feature enhancements can be pushed and deployed continuously with zero downtime.
+  </p>
+
+  <div class="footer-note">
+    VoyageX Project Report &bull; Generated for Harshitha R N &bull; Spring Boot 4.x &bull; Java 25 &bull; Deployed on Render
+  </div>
+
+</body>
+</html>
