@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoyageX | Sign In to Your Account</title>
+  <meta name="description" content="Sign in or create a VoyageX account to access exclusive travel deals, flight search, hotel recommendations and more.">
+  <meta name="robots" content="noindex">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================
+       VoyageX Auth Page Styles
+    ============================== */
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+      --secondary: #0f172a;
+      --accent: #f97316;
+      --success: #10b981;
+      --error: #ef4444;
+      --bg-dark: #0a1128;
+      --bg-dark-surface: #111e38;
+      --border: rgba(255,255,255,0.12);
+      --border-input: rgba(255,255,255,0.2);
+      --border-focus: #3b82f6;
+      --text-white: #ffffff;
+      --text-muted: rgba(255,255,255,0.6);
+      --text-subtle: rgba(255,255,255,0.4);
+      --shadow-xl: 0 24px 48px rgba(0,0,0,0.45);
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === SPLIT LAYOUT === */
+    .auth-layout {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* === LEFT HERO PANEL === */
+    .auth-hero {
+      flex: 1;
+      position: relative;
+      background: linear-gradient(145deg, #0a1128 0%, #0d1f4a 40%, #0a3070 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+
+    .auth-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 15% 30%, rgba(37,99,235,0.35) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 45% at 85% 75%, rgba(6,182,212,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+    .orb-1 { width: 300px; height: 300px; background: radial-gradient(circle, #2563eb, transparent); top: -80px; left: -80px; animation-delay: 0s; }
+    .orb-2 { width: 200px; height: 200px; background: radial-gradient(circle, #06b6d4, transparent); bottom: 150px; right: -50px; animation-delay: 3s; }
+    .orb-3 { width: 150px; height: 150px; background: radial-gradient(circle, #f97316, transparent); top: 40%; left: 40%; animation-delay: 5s; opacity: 0.3; }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    /* Grid overlay texture */
+    .auth-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: white;
+      margin-bottom: 3rem;
+    }
+    .brand-logo-icon {
+      width: 44px; height: 44px;
+      background: var(--primary-gradient);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px rgba(37,99,235,0.5);
+    }
+    .brand-logo-text { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+    .brand-logo-text span { color: #38bdf8; }
+
+    .hero-tagline {
+      color: white;
+      margin-bottom: 2rem;
+    }
+    .hero-tagline h1 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero-tagline h1 em { font-style: normal; color: #38bdf8; }
+    .hero-tagline p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 400px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform var(--transition), background var(--transition);
+    }
+    .stat-card:hover { transform: translateY(-3px); background: rgba(255,255,255,0.09); }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: #38bdf8; }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* Floating destination cards */
+    .hero-destinations { position: relative; z-index: 2; margin-top: 3rem; }
+    .dest-label { font-size: 0.78rem; font-weight: 600; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; }
+    .dest-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .dest-chip {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      transition: all var(--transition);
+    }
+    .dest-chip:hover { background: rgba(37,99,235,0.3); border-color: rgba(59,130,246,0.5); color: white; }
+
+    .hero-footer { position: relative; z-index: 2; color: var(--text-subtle); font-size: 0.78rem; }
+
+    /* === RIGHT AUTH PANEL === */
+    .auth-panel-wrapper {
+      width: 520px;
+      min-width: 460px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 2.5rem;
+      background: #0f1b33;
+      border-left: 1px solid rgba(255,255,255,0.07);
+      overflow-y: auto;
+    }
+
+    .auth-panel-inner { max-width: 420px; margin: 0 auto; width: 100%; }
+
+    /* Tab navigation */
+    .auth-tabs {
+      display: flex;
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .auth-tab-btn.active {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.4);
+    }
+    .auth-tab-btn:not(.active):hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.06); }
+
+    /* Panel sections */
+    .auth-form-panel { display: none; animation: slideIn 0.25s ease; }
+    .auth-form-panel.active { display: block; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header { margin-bottom: 1.5rem; }
+    .panel-header h2 { font-size: 1.45rem; font-weight: 800; color: white; margin-bottom: 0.35rem; }
+    .panel-header p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* Alert banner */
+    .auth-alert {
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+      display: none;
+      animation: slideIn 0.2s ease;
+    }
+    .auth-alert.error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.35); color: #fca5a5; }
+    .auth-alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); color: #6ee7b7; }
+
+    /* Form inputs */
+    .form-group { margin-bottom: 1.1rem; }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0.45rem;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.72rem 1rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.92rem;
+      transition: all var(--transition);
+      outline: none;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.3); }
+    .form-input:focus {
+      border-color: #3b82f6;
+      background: rgba(37,99,235,0.1);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .form-input.is-error { border-color: rgba(239,68,68,0.6); }
+    .field-error { font-size: 0.76rem; color: #fca5a5; margin-top: 0.3rem; display: none; }
+    .field-error.show { display: block; }
+
+    /* Password input wrapper */
+    .pwd-wrap { position: relative; }
+    .pwd-wrap .form-input { padding-right: 2.8rem; }
+    .pwd-toggle {
+      position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.4); padding: 4px;
+      transition: color var(--transition);
+    }
+    .pwd-toggle:hover { color: rgba(255,255,255,0.75); }
+    .pwd-toggle svg { display: block; }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%; padding: 0.85rem;
+      background: var(--primary-gradient);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 6px 18px rgba(37,99,235,0.4);
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(37,99,235,0.5); }
+    .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    /* Loading spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Divider */
+    .auth-divider {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin: 1.5rem 0;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Demo user cards */
+    .demo-cards { display: flex; flex-direction: column; gap: 0.6rem; }
+    .demo-card {
+      display: flex; align-items: center; gap: 0.85rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      width: 100%;
+      text-align: left;
+    }
+    .demo-card:hover { background: rgba(37,99,235,0.15); border-color: rgba(59,130,246,0.4); transform: translateX(3px); }
+    .demo-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.8rem; color: white;
+      flex-shrink: 0;
+    }
+    .demo-info { flex: 1; }
+    .demo-name { font-size: 0.88rem; font-weight: 700; color: white; }
+    .demo-email { font-size: 0.75rem; color: var(--text-muted); }
+    .demo-tier {
+      font-size: 0.68rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+    .tier-plus { background: rgba(99,102,241,0.25); color: #a5b4fc; }
+    .tier-elite { background: rgba(249,115,22,0.2); color: #fdba74; }
+
+    /* Forgot password link */
+    .link-btn {
+      background: none; border: none; cursor: pointer;
+      color: #60a5fa; font-family: inherit;
+      font-size: 0.82rem; font-weight: 600;
+      transition: color var(--transition); padding: 0;
+    }
+    .link-btn:hover { color: #93c5fd; }
+
+    /* Success state for forgot pw */
+    .success-notice {
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    .success-notice-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .success-notice h4 { font-size: 0.9rem; font-weight: 700; color: #6ee7b7; margin-bottom: 0.25rem; }
+    .success-notice p { font-size: 0.8rem; color: rgba(110,231,183,0.8); }
+
+    /* Footer link */
+    .auth-footer-note {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .auth-footer-note button { color: #60a5fa; background: none; border: none; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 0.82rem; }
+
+    /* Features strip */
+    .auth-features {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .feature-chip {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.74rem; color: var(--text-muted);
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px; padding: 0.3rem 0.7rem;
+    }
+
+    /* Redirect notice (shown while checking existing session) */
+    .session-checking {
+      position: fixed; inset: 0;
+      background: var(--bg-dark);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 9999; gap: 1rem;
+      opacity: 1; transition: opacity 0.3s ease;
+    }
+    .session-checking.done { opacity: 0; pointer-events: none; }
+    .session-logo {
+      font-size: 2rem; font-weight: 800; color: white;
+    }
+    .session-logo span { color: #38bdf8; }
+    .session-spinner {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .session-msg { font-size: 0.88rem; color: var(--text-muted); }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: #1e3a6e; border: 1px solid rgba(59,130,246,0.35);
+      border-radius: 12px; padding: 0.75rem 1.5rem;
+      color: white; font-size: 0.88rem; font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 9998; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* Mobile responsive */
+    @media (max-width: 860px) {
+      .auth-hero { display: none; }
+      .auth-panel-wrapper {
+        width: 100%; min-width: 0;
+        padding: 2rem 1.5rem;
+        justify-content: flex-start;
+        padding-top: 3rem;
+      }
+      .auth-panel-inner { max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .auth-panel-wrapper { padding: 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Session Checking Overlay -->
+  <div class="session-checking" id="sessionCheckingOverlay">
+    <div class="session-logo">Voyage<span>X</span></div>
+    <div class="session-spinner"></div>
+    <div class="session-msg">Checking your session...</div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="loginToast"></div>
+
+  <div class="auth-layout">
+
+    <!-- ============================================================
+         LEFT: Hero Panel
+    ============================================================ -->
+    <div class="auth-hero">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+
+      <div class="hero-content">
+        <!-- Brand -->
+        <a href="/" class="brand-logo" aria-label="VoyageX Home">
+          <div class="brand-logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+            </svg>
+          </div>
+          <span class="brand-logo-text">Voyage<span>X</span></span>
+        </a>
+
+        <!-- Tagline -->
+        <div class="hero-tagline">
+          <h1>Your Next<br><em>Adventure</em><br>Starts Here</h1>
+          <p>Search hundreds of airlines, discover verified luxury hotels, and enjoy transparent pricing with zero surprise fees — all from one premium platform.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="stat-num">500+</div>
+            <div class="stat-lbl">Partner Airlines</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">12K+</div>
+            <div class="stat-lbl">Hotels Worldwide</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">30%</div>
+            <div class="stat-lbl">Average Savings</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popular destinations -->
+      <div class="hero-destinations">
+        <div class="dest-label">✈️ Popular Destinations</div>
+        <div class="dest-chips">
+          <span class="dest-chip">🇮🇳 Mumbai</span>
+          <span class="dest-chip">🇦🇪 Dubai</span>
+          <span class="dest-chip">🇬🇷 Santorini</span>
+          <span class="dest-chip">🇯🇵 Tokyo</span>
+          <span class="dest-chip">🇫🇷 Paris</span>
+          <span class="dest-chip">🇬🇧 London</span>
+          <span class="dest-chip">🇺🇸 New York</span>
+          <span class="dest-chip">🇨🇭 Interlaken</span>
+        </div>
+      </div>
+
+      <div class="hero-footer">
+        © 2026 VoyageX Travel Pvt. Ltd. &nbsp;·&nbsp; Secure Booking &nbsp;·&nbsp; 24/7 Support
+      </div>
+    </div>
+
+    <!-- ============================================================
+         RIGHT: Auth Panel
+    ============================================================ -->
+    <div class="auth-panel-wrapper">
+      <div class="auth-panel-inner">
+
+        <!-- Mobile brand logo (shown only on mobile) -->
+        <div style="display: none; margin-bottom: 2rem;" id="mobileBrand">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#2563eb,#06b6d4);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            </div>
+            <span style="font-size:1.3rem;font-weight:800;color:white;">Voyage<span style="color:#38bdf8;">X</span></span>
+          </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab-btn active" id="loginTabBtn" onclick="switchTab('login')" role="tab" aria-selected="true">Sign In</button>
+          <button class="auth-tab-btn" id="registerTabBtn" onclick="switchTab('register')" role="tab" aria-selected="false">Create Account</button>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="auth-alert" id="alertBanner" role="alert"></div>
+
+        <!-- ===== LOGIN PANEL ===== -->
+        <div class="auth-form-panel active" id="loginPanel">
+          <div class="panel-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access your flights, saved deals, and personalized recommendations.</p>
+          </div>
+
+          <form id="loginForm" onsubmit="return false;" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="loginEmail">Email Address</label>
+              <input type="email" class="form-input" id="loginEmail" placeholder="you@example.com" autocomplete="email" required>
+              <div class="field-error" id="loginEmailErr">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="loginPassword">
+                Password
+                <button type="button" class="link-btn" style="float:right; margin-top:-1px;" onclick="switchTab('forgot')">Forgot password?</button>
+              </label>
+              <div class="pwd-wrap">
+                <input type="password" class="form-input" id="loginPassword" placeholder="Your password" autocomplete="current-password" required>
+                <button type="button" class="pwd-toggle" id="toggleLoginPwd" aria-label="Show password">
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <div class="field-error" id="loginPasswordErr">Password is required.</div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="loginSubmitBtn">
+              <div class="spinner" id="loginSpinner"></div>
+              <span id="loginBtnText">Sign In to VoyageX</span>
+            </button>
+          </form>
+
+          <!-- Divider + Demo -->
+          <div class="auth-divider">Quick access demo accounts</div>
+          <div class="demo-cards">
+            <button class="demo-card" onclick="demoLogin('arun')">
+              <div class="demo-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">AP</div>
+              <div class="demo-info">
+                <div class="demo-name">Arun Patel</div>
+                <div class="demo-email">arun.patel@example.com · pwd: voyagex123</div>
+              </div>
+              <div class="demo-tier tier-plus">Plus</div>
+            </button>
+            <button class="demo-card" onclick="demoLogin('elena')">
+              <div class="demo-avatar" style="background: linear-gradient(135deg, #f97316, #ec4899);">ER</div>
+              <div class="demo-info">
+                <div class="demo-name">Elena Rostova</div>
+                <div class="demo-email">elena.rostova@example.com · pwd: voyagex123</div>
+              </div>
+              <div class="demo-tier tier-elite">Elite</div>
+            </button>
+          </div>
+
+          <div class="auth-footer-note">
+            New to VoyageX? <button onclick="switchTab('register')">Create a free account</button>
+          </div>
+        </div>
+
+        <!-- ===== REGISTER PANEL ===== -->
+        <div class="auth-form-panel" id="registerPanel">
+          <div class="panel-header">
+            <h2>Join VoyageX</h2>
+            <p>Create your free account and unlock personalized travel deals, flight search, and hotel recommendations.</p>
+          </div>
+
+          <form id="registerForm" onsubmit="return false;" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="regName">Full Name</label>
+              <input type="text" class="form-input" id="regName" placeholder="e.g. Maya Lin" autocomplete="name" required>
+              <div class="field-error" id="regNameErr">Full name is required (2+ characters).</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regEmail">Email Address</label>
+              <input type="email" class="form-input" id="regEmail" placeholder="you@example.com" autocomplete="email" required>
+              <div class="field-error" id="regEmailErr">Please enter a valid email address.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regPassword">Password</label>
+              <div class="pwd-wrap">
+                <input type="password" class="form-input" id="regPassword" placeholder="At least 6 characters" autocomplete="new-password" required>
+                <button type="button" class="pwd-toggle" id="toggleRegPwd" aria-label="Show password">
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <div class="field-error" id="regPasswordErr">Password must be at least 6 characters.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regConfirmPassword">Confirm Password</label>
+              <div class="pwd-wrap">
+                <input type="password" class="form-input" id="regConfirmPassword" placeholder="Re-enter your password" autocomplete="new-password" required>
+                <button type="button" class="pwd-toggle" id="toggleRegConfirmPwd" aria-label="Show confirm password">
+                  <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <div class="field-error" id="regConfirmPasswordErr">Passwords do not match.</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regTier">Membership Tier</label>
+              <select class="form-input" id="regTier" style="cursor:pointer;">
+                <option value="VoyageX Explorer">VoyageX Explorer (Free)</option>
+                <option value="VoyageX Plus">VoyageX Plus (5% Perks — Demo)</option>
+                <option value="VoyageX Elite">VoyageX Elite (VIP Luxury — Demo)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-submit" id="registerSubmitBtn">
+              <div class="spinner" id="registerSpinner"></div>
+              <span id="registerBtnText">Create VoyageX Account</span>
+            </button>
+          </form>
+
+          <div class="auth-footer-note">
+            Already have an account? <button onclick="switchTab('login')">Sign in here</button>
+          </div>
+        </div>
+
+        <!-- ===== FORGOT PASSWORD PANEL ===== -->
+        <div class="auth-form-panel" id="forgotPanel">
+          <div class="panel-header">
+            <h2>Reset Password</h2>
+            <p>Enter your account email address and we'll send you a secure reset link.</p>
+          </div>
+
+          <form id="forgotForm" onsubmit="return false;" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="forgotEmail">Email Address</label>
+              <input type="email" class="form-input" id="forgotEmail" placeholder="you@example.com" autocomplete="email" required>
+              <div class="field-error" id="forgotEmailErr">Please enter a valid email address.</div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="forgotSubmitBtn">
+              <div class="spinner" id="forgotSpinner"></div>
+              <span id="forgotBtnText">Send Password Reset Link</span>
+            </button>
+          </form>
+
+          <div class="success-notice" id="forgotSuccess">
+            <div class="success-notice-icon">✉️</div>
+            <h4>Reset Link Sent</h4>
+            <p id="forgotSuccessText">Check your inbox for the secure password reset link.</p>
+          </div>
+
+          <div class="auth-footer-note" style="margin-top: 1rem;">
+            Remember your password? <button onclick="switchTab('login')">Back to Sign In</button>
+          </div>
+        </div>
+
+        <!-- Feature strip -->
+        <div class="auth-features">
+          <div class="feature-chip">🔒 Secure PBKDF2 Encryption</div>
+          <div class="feature-chip">✈️ 500+ Airlines</div>
+          <div class="feature-chip">🏨 Expert Hotel Curation</div>
+          <div class="feature-chip">👑 VIP Member Perks</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==============================================================
+       VoyageX Login Page — Auth Flow Script
+    =============================================================== */
+    const SESSION_KEY = 'vx_session_token';
+    const USER_KEY = 'vx_session_user';
+
+    // =====================
+    // Session guard on load
+    // =====================
+    (async function checkExistingSession() {
+      const overlay = document.getElementById('sessionCheckingOverlay');
+      const token = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
+
+      if (token) {
+        try {
+          const res = await fetch('/api/auth/verify-session?token=' + encodeURIComponent(token));
+          if (res.ok) {
+            const data = await res.json();
+            if (data.valid) {
+              // Already logged in — go straight to homepage
+              window.location.replace('/');
+              return;
+            }
+          }
+        } catch (e) { /* network error, show login */ }
+        // Token invalid — clear it
+        sessionStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(USER_KEY);
+        localStorage.removeItem(USER_KEY);
+        localStorage.removeItem('voyagex_active_user');
+      }
+
+      // Not authenticated — show login page
+      if (overlay) {
+        overlay.classList.add('done');
+        setTimeout(() => { overlay.style.display = 'none'; }, 350);
+      }
+
+      // Check if redirected from a protected page
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('expired') === '1') showAlert('Your session has expired. Please sign in again.', 'error');
+      if (params.get('redirect') === '1') showAlert('Please sign in to access VoyageX.', 'error');
+
+      // Mobile brand visibility
+      if (window.innerWidth <= 860) {
+        const el = document.getElementById('mobileBrand');
+        if (el) el.style.display = 'block';
+      }
+    })();
+
+    // =====================
+    // Tab switching
+    // =====================
+    function switchTab(tab) {
+      clearAlert();
+      document.querySelectorAll('.auth-form-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.auth-tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+
+      if (tab === 'login') {
+        document.getElementById('loginPanel').classList.add('active');
+        document.getElementById('loginTabBtn').classList.add('active');
+        document.getElementById('loginTabBtn').setAttribute('aria-selected', 'true');
+        document.getElementById('loginEmail').focus();
+      } else if (tab === 'register') {
+        document.getElementById('registerPanel').classList.add('active');
+        document.getElementById('registerTabBtn').classList.add('active');
+        document.getElementById('registerTabBtn').setAttribute('aria-selected', 'true');
+        document.getElementById('regName').focus();
+      } else if (tab === 'forgot') {
+        document.getElementById('forgotPanel').classList.add('active');
+        // No tab highlight for forgot (sub-flow)
+        document.getElementById('forgotEmail').focus();
+        document.getElementById('forgotSuccess').style.display = 'none';
+      }
+    }
+
+    // =====================
+    // Alert helpers
+    // =====================
+    function showAlert(msg, type = 'error') {
+      const el = document.getElementById('alertBanner');
+      el.textContent = msg;
+      el.className = 'auth-alert ' + type;
+      el.style.display = 'block';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    function clearAlert() {
+      const el = document.getElementById('alertBanner');
+      el.style.display = 'none';
+      el.textContent = '';
+    }
+    function showFieldError(id, msg) {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = msg; el.classList.add('show'); }
+    }
+    function clearFieldError(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('show');
+    }
+    function markInputError(id, isErr) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('is-error', isErr);
+    }
+
+    // =====================
+    // Toast
+    // =====================
+    function showToast(msg, dur = 3500) {
+      const t = document.getElementById('loginToast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), dur);
+    }
+
+    // =====================
+    // Password toggles
+    // =====================
+    function setupPwdToggle(btnId, inputId) {
+      const btn = document.getElementById(btnId);
+      const input = document.getElementById(inputId);
+      if (!btn || !input) return;
+      btn.addEventListener('click', () => {
+        const show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        btn.querySelector('.eye-open').style.display = show ? 'none' : '';
+        btn.querySelector('.eye-closed').style.display = show ? '' : 'none';
+        btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      });
+    }
+    setupPwdToggle('toggleLoginPwd', 'loginPassword');
+    setupPwdToggle('toggleRegPwd', 'regPassword');
+    setupPwdToggle('toggleRegConfirmPwd', 'regConfirmPassword');
+
+    // =====================
+    // Save session helper
+    // =====================
+    function saveSession(token, user) {
+      // Store in both sessionStorage (tab-local) and localStorage (persist across tabs/refresh)
+      sessionStorage.setItem(SESSION_KEY, token);
+      localStorage.setItem(SESSION_KEY, token);
+      const userJson = JSON.stringify(user);
+      sessionStorage.setItem(USER_KEY, userJson);
+      localStorage.setItem(USER_KEY, userJson);
+      // Also update voyagex_active_user for main.js compatibility
+      const compatUser = {
+        id: user.id,
+        name: user.fullName || user.name,
+        email: user.email,
+        initials: user.initials,
+        tier: user.membershipTier || user.tier,
+        savedDealIds: user.savedDealIds || []
+      };
+      localStorage.setItem('voyagex_active_user', JSON.stringify(compatUser));
+    }
+
+    // =====================
+    // Set button loading
+    // =====================
+    function setLoading(btnId, spinnerId, textId, isLoading, normalText) {
+      const btn = document.getElementById(btnId);
+      const spinner = document.getElementById(spinnerId);
+      const text = document.getElementById(textId);
+      if (btn) btn.disabled = isLoading;
+      if (spinner) spinner.style.display = isLoading ? 'block' : 'none';
+      if (text && !isLoading) text.textContent = normalText;
+    }
+
+    // =====================
+    // Login Form Submit
+    // =====================
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      let hasError = false;
+
+      if (!email || !emailRegex.test(email)) {
+        showFieldError('loginEmailErr', 'Please enter a valid email address.');
+        markInputError('loginEmail', true);
+        hasError = true;
+      } else { clearFieldError('loginEmailErr'); markInputError('loginEmail', false); }
+
+      if (!password) {
+        showFieldError('loginPasswordErr', 'Password is required.');
+        markInputError('loginPassword', true);
+        hasError = true;
+      } else { clearFieldError('loginPasswordErr'); markInputError('loginPassword', false); }
+
+      if (hasError) return;
+
+      setLoading('loginSubmitBtn', 'loginSpinner', 'loginBtnText', true, '');
+      document.getElementById('loginBtnText').textContent = 'Signing in...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          showAlert(data.message || 'Invalid email or password. Please try again.');
+          return;
+        }
+
+        saveSession(data.token, data.user);
+        showToast(`Welcome back, ${data.user.fullName}! Redirecting…`);
+        setTimeout(() => { window.location.href = '/'; }, 800);
+      } catch (err) {
+        showAlert('Unable to connect to authentication service. Please check your connection and try again.');
+      } finally {
+        setLoading('loginSubmitBtn', 'loginSpinner', 'loginBtnText', false, 'Sign In to VoyageX');
+      }
+    });
+
+    // =====================
+    // Register Form Submit
+    // =====================
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+      const tier = document.getElementById('regTier').value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      let hasError = false;
+      if (!name || name.length < 2) {
+        showFieldError('regNameErr', 'Full name must be at least 2 characters.'); markInputError('regName', true); hasError = true;
+      } else { clearFieldError('regNameErr'); markInputError('regName', false); }
+
+      if (!email || !emailRegex.test(email)) {
+        showFieldError('regEmailErr', 'Please enter a valid email address.'); markInputError('regEmail', true); hasError = true;
+      } else { clearFieldError('regEmailErr'); markInputError('regEmail', false); }
+
+      if (!password || password.length < 6) {
+        showFieldError('regPasswordErr', 'Password must be at least 6 characters.'); markInputError('regPassword', true); hasError = true;
+      } else { clearFieldError('regPasswordErr'); markInputError('regPassword', false); }
+
+      if (password !== confirmPassword) {
+        showFieldError('regConfirmPasswordErr', 'Passwords do not match.'); markInputError('regConfirmPassword', true); hasError = true;
+      } else { clearFieldError('regConfirmPasswordErr'); markInputError('regConfirmPassword', false); }
+
+      if (hasError) return;
+
+      setLoading('registerSubmitBtn', 'registerSpinner', 'registerBtnText', true, '');
+      document.getElementById('registerBtnText').textContent = 'Creating Account...';
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName: name, email, password, confirmPassword, membershipTier: tier })
+        });
+        const data = await res.json();
+
+        if (!res.ok || !data.success) {
+          showAlert(data.message || 'Registration failed. Please try again.');
+          return;
+        }
+
+        saveSession(data.token, data.user);
+        showToast(`Welcome to VoyageX, ${data.user.fullName}! Redirecting…`);
+        setTimeout(() => { window.location.href = '/'; }, 800);
+      } catch (err) {
+        showAlert('Unable to complete registration. Please check your connection and try again.');
+      } finally {
+        setLoading('registerSubmitBtn', 'registerSpinner', 'registerBtnText', false, 'Create VoyageX Account');
+      }
+    });
+
+    // =====================
+    // Forgot Password Submit
+    // =====================
+    document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearAlert();
+
+      const email = document.getElementById('forgotEmail').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!email || !emailRegex.test(email)) {
+        showFieldError('forgotEmailErr', 'Please enter a valid email address.');
+        markInputError('forgotEmail', true);
+        return;
+      }
+      clearFieldError('forgotEmailErr'); markInputError('forgotEmail', false);
+
+      setLoading('forgotSubmitBtn', 'forgotSpinner', 'forgotBtnText', true, '');
+      document.getElementById('forgotBtnText').textContent = 'Sending...';
+
+      try {
+        const res = await fetch('/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        const successBox = document.getElementById('forgotSuccess');
+        const successText = document.getElementById('forgotSuccessText');
+        if (successText) successText.textContent = data.message || `If an account exists for ${email}, a reset link has been sent.`;
+        if (successBox) successBox.style.display = 'block';
+        document.getElementById('forgotForm').reset();
+      } catch (err) {
+        showAlert('Unable to process request. Please try again.');
+      } finally {
+        setLoading('forgotSubmitBtn', 'forgotSpinner', 'forgotBtnText', false, 'Send Password Reset Link');
+      }
+    });
+
+    // =====================
+    // Demo Login
+    // =====================
+    async function demoLogin(userId) {
+      clearAlert();
+      showToast(`Signing in as demo traveler…`);
+      try {
+        const res = await fetch('/api/auth/demo-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: userId })
+        });
+        if (!res.ok) throw new Error('Demo login failed');
+        const data = await res.json();
+
+        // Build user from response (demo-login returns flat object, not nested user)
+        const user = data.user || {
+          id: null, fullName: data.name, email: data.email,
+          membershipTier: data.tier, initials: data.initials,
+          savedDealIds: Array.from(data.savedDeals || [])
+        };
+        saveSession(data.token, user);
+        showToast(`Signed in as ${user.fullName || data.name}! Redirecting…`);
+        setTimeout(() => { window.location.href = '/'; }, 800);
+      } catch (err) {
+        showAlert('Demo login failed. The server may be starting up — please try again in a moment.');
+      }
+    }
+
+    window.demoLogin = demoLogin;
+  </script>
+</body>
+</html>

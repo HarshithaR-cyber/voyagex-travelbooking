@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoyageX | Modern Travel & Flight Booking</title>
+  <meta name="description" content="Discover, compare, and book flights and luxury boutique hotels with VoyageX. Best rates, flexible cancellations, and 24/7 dedicated travel support.">
+  
+  <!-- Typography (Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo" aria-label="VoyageX Travel Home">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+          </svg>
+        </div>
+        <span>Voyage<span class="logo-highlight">X</span></span>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#searchSection" class="nav-link active">Flights</a></li>
+          <li><a href="#hotelsSection" class="nav-link">Hotels</a></li>
+          <li><a href="#destinationsSection" class="nav-link">Destinations</a></li>
+          <li><a href="#flightStatusSection" class="nav-link">Live Status</a></li>
+          <li><a href="#recommendationsSection" class="nav-link">Match</a></li>
+          <li><a href="#reviewsSection" class="nav-link">Reviews</a></li>
+          <li><a href="#dealsSection" class="nav-link">Special Deals</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <select class="currency-select" id="currencySelector" aria-label="Select currency">
+          <option value="USD">$ USD</option>
+          <option value="EUR">€ EUR</option>
+          <option value="GBP">£ GBP</option>
+          <option value="INR">₹ INR</option>
+        </select>
+        <button type="button" class="btn btn-outline-light" id="btnMyTrips" style="padding: 0.5rem 1rem; font-size: 0.88rem;">My Trips</button>
+        <button type="button" class="btn btn-primary" id="btnAuth" style="padding: 0.5rem 1.1rem; font-size: 0.88rem;">Sign In</button>
+        
+        <div class="user-dropdown-wrapper" id="userDropdownWrapper" style="display: none;">
+          <div id="userProfileBadge" class="user-profile-badge" title="Click to view account options" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="user-avatar-dot" id="navAvatarDot">AP</div>
+            <span id="navUserName">Arun Patel</span>
+            <span id="navUserTierBadge" class="user-tier-badge">Plus</span>
+            <span style="font-size: 0.7rem; opacity: 0.8; margin-left: 2px;">▼</span>
+          </div>
+          <div class="user-menu-dropdown" id="userMenuDropdown" role="menu">
+            <div class="user-menu-header">
+              <strong id="dropdownUserName">Arun Patel</strong>
+              <span id="dropdownUserEmail">arun.patel@example.com</span>
+              <div id="dropdownUserTier" class="user-tier-badge">VoyageX Plus</div>
+            </div>
+            <button type="button" class="user-menu-item" id="btnDropdownMyTrips" role="menuitem">
+              <span>✈️</span> My Booked Trips
+            </button>
+            <button type="button" class="user-menu-item" id="btnDropdownSavedDeals" role="menuitem">
+              <span>❤️</span> Saved VIP Deals (<span id="savedDealsCount">0</span>)
+            </button>
+            <button type="button" class="user-menu-item" id="btnDropdownMembership" role="menuitem">
+              <span>👑</span> VIP Membership Tiers
+            </button>
+            <button type="button" class="user-menu-item" id="btnDropdownSignOut" role="menuitem" style="color: #ef4444; border-top: 1px solid var(--border);">
+              <span>🚪</span> Sign Out
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Flight Search -->
+  <main>
+    <section class="hero" id="searchSection">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span>Exclusive Deals: Save up to 30% on International Flights</span>
+          </div>
+          <h1 class="hero-title">
+            Where Will Your <span>Next Story</span> Begin?
+          </h1>
+          <p class="hero-subtitle">
+            Search hundreds of partner airlines, discover verified boutique resorts, and enjoy transparent pricing with zero surprise booking fees.
+          </p>
+        </div>
+
+        <!-- Flight Search Card -->
+        <div class="search-card">
+          <!-- Search Mode Tabs -->
+          <div class="search-tabs" role="tablist">
+            <button type="button" class="search-tab active" role="tab" aria-selected="true" onclick="window.switchMainTab('flights')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+              </svg>
+              <span>Flights</span>
+            </button>
+            <a href="#hotelsSection" class="search-tab" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+              </svg>
+              <span>Stays &amp; Hotels</span>
+            </a>
+            <a href="#flightStatusSection" class="search-tab" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Live Flight Status</span>
+            </a>
+            <a href="#recommendationsSection" class="search-tab" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span>Smart Match</span>
+            </a>
+            <a href="#dealsSection" class="search-tab" role="tab" aria-selected="false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span>VIP Deals</span>
+            </a>
+          </div>
+
+          <!-- Validation Message Alert Box -->
+          <div id="searchAlert" class="search-alert" role="alert" aria-live="assertive">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span id="searchAlertText">Please verify your search inputs.</span>
+          </div>
+
+          <!-- Datalist for Indian & International Airport Autocomplete -->
+          <datalist id="airportsDatalist">
+            <option value="New Delhi (DEL)">New Delhi - Indira Gandhi Intl (DEL)</option>
+            <option value="Mumbai (BOM)">Mumbai - Chhatrapati Shivaji Maharaj (BOM)</option>
+            <option value="Bengaluru (BLR)">Bengaluru - Kempegowda Intl (BLR)</option>
+            <option value="Goa (GOI)">Goa - Manohar / Dabolim Intl (GOI)</option>
+            <option value="Chennai (MAA)">Chennai - Chennai Intl (MAA)</option>
+            <option value="Kolkata (CCU)">Kolkata - Netaji Subhash Bose (CCU)</option>
+            <option value="Hyderabad (HYD)">Hyderabad - Rajiv Gandhi Intl (HYD)</option>
+            <option value="Kochi (COK)">Kochi - Cochin Intl (COK)</option>
+            <option value="Dubai (DXB)">Dubai - Dubai Intl (DXB)</option>
+            <option value="Singapore (SIN)">Singapore - Changi Airport (SIN)</option>
+            <option value="London (LHR)">London - Heathrow Airport (LHR)</option>
+            <option value="Paris (CDG)">Paris - Charles de Gaulle (CDG)</option>
+            <option value="New York (JFK)">New York - John F. Kennedy Intl (JFK)</option>
+            <option value="Tokyo (HND)">Tokyo - Haneda Airport (HND)</option>
+            <option value="Bangkok (BKK)">Bangkok - Suvarnabhumi (BKK)</option>
+            <option value="Bali (DPS)">Bali - Ngurah Rai Intl (DPS)</option>
+            <option value="Rome (FCO)">Rome - Fiumicino Airport (FCO)</option>
+            <option value="Santorini (JTR)">Santorini - Thira Airport (JTR)</option>
+          </datalist>
+
+          <!-- Search Form -->
+          <form id="flightSearchForm" onsubmit="event.preventDefault(); window.triggerFlightSearch();">
+            <!-- Trip Type & Cabin Class Selection -->
+            <div class="trip-options-bar">
+              <div class="trip-type-radios">
+                <label class="radio-label">
+                  <input type="radio" name="tripType" value="roundTrip" id="tripRound" checked>
+                  <span>Round Trip</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="tripType" value="oneWay" id="tripOneWay">
+                  <span>One Way</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="tripType" value="multiCity" id="tripMulti">
+                  <span>Multi-City</span>
+                </label>
+              </div>
+
+              <div class="cabin-selector" style="display: flex; gap: 0.75rem; align-items: center;">
+                <label for="cabinClassSelect" class="visually-hidden" style="display:none;">Cabin Class</label>
+                <select id="cabinClassSelect" name="cabinClass">
+                  <option value="Economy">Economy Class</option>
+                  <option value="Premium Economy">Premium Economy</option>
+                  <option value="Business">Business Class</option>
+                  <option value="First">First Class</option>
+                </select>
+                <span id="appliedPromoTag" class="applied-promo-tag" style="display: none; padding: 0.35rem 0.65rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; background: #ec4899; color: #fff;">
+                  30% Off (VOYAGE30) <button type="button" onclick="window.removePromoCode()" style="background:none; border:none; color:#fff; cursor:pointer; font-weight:bold; margin-left:4px;">&times;</button>
+                </span>
+              </div>
+            </div>
+
+            <!-- Search Inputs Grid -->
+            <div class="search-form-grid">
+              <!-- From (Origin) -->
+              <div class="form-field">
+                <label for="originInput">From (Departure)</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <input type="text" id="originInput" name="origin" value="New Delhi (DEL)" list="airportsDatalist" placeholder="City or Airport (e.g. DEL)" autocomplete="off" required>
+                </div>
+              </div>
+
+              <!-- Swap Button -->
+              <div class="swap-btn-container">
+                <button type="button" class="swap-btn" id="swapBtn" title="Swap departure and destination" aria-label="Swap origin and destination">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <polyline points="17 1 21 5 17 9"></polyline>
+                    <path d="M3 5h18"></path>
+                    <polyline points="7 23 3 19 7 15"></polyline>
+                    <path d="M21 19H3"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- To (Destination) -->
+              <div class="form-field">
+                <label for="destInput">To (Destination)</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 21s-6-5.333-6-10a6 6 0 0 1 12 0c0 4.667-6 10-6 10z"/>
+                    <circle cx="12" cy="11" r="2"/>
+                  </svg>
+                  <input type="text" id="destInput" name="destination" value="Dubai (DXB)" list="airportsDatalist" placeholder="Where to? (e.g. DXB or Paris)" autocomplete="off" required>
+                </div>
+              </div>
+
+              <!-- Departure Date -->
+              <div class="form-field">
+                <label for="departureDate">Departure Date</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <input type="date" id="departureDate" name="departureDate" required>
+                </div>
+              </div>
+
+              <!-- Return Date -->
+              <div class="form-field" id="returnDateField">
+                <label for="returnDate">Return Date</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <input type="date" id="returnDate" name="returnDate">
+                </div>
+              </div>
+
+              <!-- Travellers & Class Dropdown -->
+              <div class="form-field" style="position: relative;">
+                <label id="travellersLabel">Travellers</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                  <button type="button" class="travellers-trigger" id="travellersTrigger" aria-haspopup="true" aria-labelledby="travellersLabel">
+                    <span id="travellersSummary">1 Traveller</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </button>
+                </div>
+
+                <input type="hidden" name="adults" id="adultsInput" value="1">
+                <input type="hidden" name="children" id="childrenInput" value="0">
+
+                <!-- Popover Stepper Modal -->
+                <div class="travellers-dropdown" id="travellersDropdown">
+                  <div class="stepper-row">
+                    <div class="stepper-label">
+                      Adults
+                      <span>Ages 12+</span>
+                    </div>
+                    <div class="stepper-controls">
+                      <button type="button" class="stepper-btn" data-type="adults" data-action="minus" aria-label="Decrease adults">-</button>
+                      <span class="stepper-val" id="adultsVal">1</span>
+                      <button type="button" class="stepper-btn" data-type="adults" data-action="plus" aria-label="Increase adults">+</button>
+                    </div>
+                  </div>
+                  <div class="stepper-row">
+                    <div class="stepper-label">
+                      Children
+                      <span>Ages 2 - 11</span>
+                    </div>
+                    <div class="stepper-controls">
+                      <button type="button" class="stepper-btn" data-type="children" data-action="minus" aria-label="Decrease children">-</button>
+                      <span class="stepper-val" id="childrenVal">0</span>
+                      <button type="button" class="stepper-btn" data-type="children" data-action="plus" aria-label="Increase children">+</button>
+                    </div>
+                  </div>
+                  <button type="button" class="travellers-apply-btn" id="travellersApplyBtn">Done</button>
+                </div>
+              </div>
+
+              <!-- Search CTA Button -->
+              <button type="submit" class="search-submit-btn" id="submitSearchBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Search Flights</span>
+              </button>
+            </div>
+
+            <!-- Multi-City Leg 2 (Displayed when Multi-City trip type is active) -->
+            <div class="search-form-grid" id="multiCityRow" style="display: none; margin-top: 0.75rem; border-top: 1px dashed var(--border); padding-top: 0.75rem;">
+              <div class="form-field">
+                <label for="multiOriginInput">Leg 2: From (Origin)</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <input type="text" id="multiOriginInput" name="multiOrigin" list="airportsDatalist" placeholder="Connecting City (e.g. BOM)" autocomplete="off">
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="multiDestInput">Leg 2: To (Destination)</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 21s-6-5.333-6-10a6 6 0 0 1 12 0c0 4.667-6 10-6 10z"/>
+                    <circle cx="12" cy="11" r="2"/>
+                  </svg>
+                  <input type="text" id="multiDestInput" name="multiDest" list="airportsDatalist" placeholder="Final Destination (e.g. DXB)" autocomplete="off">
+                </div>
+              </div>
+              <div class="form-field">
+                <label for="multiDateInput">Leg 2: Date</label>
+                <div class="form-field-input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <input type="date" id="multiDateInput" name="multiDate">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Quick Destination Tags -->
+          <div class="quick-tags">
+            <span class="quick-tags-title">Popular Routes:</span>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('New Delhi (DEL)')">🇮🇳 New Delhi</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Mumbai (BOM)')">🇮🇳 Mumbai</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Goa (GOI)')">🏖️ Goa</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Dubai (DXB)')">✨ Dubai</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Singapore (SIN)')">🇸🇬 Singapore</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('London (LHR)')">🇬🇧 London</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Paris (CDG)')">🗼 Paris</button>
+            <button type="button" class="quick-chip" onclick="window.selectDestination('Tokyo (HND)')">🌸 Tokyo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Highlights Strip -->
+    <section class="trust-bar" aria-label="Key Service Benefits">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h3>Best Price Guarantee</h3>
+              <p>Find a lower fare within 24h? We will gladly match the difference.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h3>Instant E-Tickets</h3>
+              <p>Direct confirmation codes sent to your phone and email.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h3>24/7 Global Support</h3>
+              <p>Round-the-clock multilingual assistance for rebooking or assistance.</p>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon-box">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+            </div>
+            <div class="trust-info">
+              <h3>Flexible Cancellations</h3>
+              <p>Zero airline change fees on most flexible fare classes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Simulated Flight Search Results (Dynamically populated/toggled via JS) -->
+    <section class="search-results-section" id="searchResultsSection" style="display: none;">
+      <div class="container">
+        <!-- Results Header Banner -->
+        <div class="results-banner">
+          <div class="results-info">
+            <h3>Flight Options: <span id="resOrigin">DEL</span> &rarr; <span id="resDest">BOM</span> (<span id="resCount">0</span> found)</h3>
+            <p>
+              Class: <strong id="resClass">Economy</strong> &bull;
+              Depart: <span id="resDepartDate">2026-11-01</span> &bull;
+              Passengers: <span id="resPassengers">1</span>
+            </p>
+          </div>
+          <div class="demo-disclaimer" title="Demonstration data generated by VoyageX mock flight search engine">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span>Mock Demonstration Data &bull; Not Live Airline Inventory</span>
+          </div>
+        </div>
+
+        <!-- Flight Recommendation Category Tabs -->
+        <div class="flight-rec-tabs" id="flightRecTabs" role="tablist" aria-label="Flight Recommendation Categories">
+          <button type="button" class="flight-rec-tab active" data-cat="ALL" role="tab" aria-selected="true">All Search Results</button>
+          <button type="button" class="flight-rec-tab" data-cat="BEST_OVERALL" role="tab" aria-selected="false">🌟 Best Overall</button>
+          <button type="button" class="flight-rec-tab" data-cat="CHEAPEST" role="tab" aria-selected="false">💰 Cheapest Flights</button>
+          <button type="button" class="flight-rec-tab" data-cat="FASTEST" role="tab" aria-selected="false">⚡ Fastest Routes</button>
+          <button type="button" class="flight-rec-tab" data-cat="NONSTOP" role="tab" aria-selected="false">✈️ Nonstop Only</button>
+          <button type="button" class="flight-rec-tab" data-cat="POPULAR" role="tab" aria-selected="false">🏢 Popular Airlines</button>
+          <button type="button" class="flight-rec-tab" data-cat="PREMIUM" role="tab" aria-selected="false">👑 Premium Cabins</button>
+        </div>
+
+        <!-- Filter & Sorting Toolbar -->
+        <div class="results-toolbar" id="resultsToolbar" aria-label="Flight filters and sorting">
+          <div class="toolbar-filters">
+            <!-- Airline Filter -->
+            <div class="filter-group">
+              <label for="airlineFilter">Airline:</label>
+              <select id="airlineFilter" class="toolbar-select">
+                <option value="ALL">All Airlines</option>
+              </select>
+            </div>
+
+            <!-- Non-stop Toggle -->
+            <label class="toggle-switch" for="nonStopFilter">
+              <input type="checkbox" id="nonStopFilter">
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">Direct / Non-stop Only</span>
+            </label>
+
+            <!-- Price Slider -->
+            <div class="price-slider-box">
+              <label for="priceRangeFilter">Max Price: <strong id="priceRangeVal">$2,000</strong></label>
+              <input type="range" id="priceRangeFilter" min="100" max="2500" step="25" value="2500">
+            </div>
+          </div>
+
+          <div class="toolbar-sort">
+            <label for="sortBySelect">Sort by:</label>
+            <select id="sortBySelect" class="toolbar-select">
+              <option value="price_asc">Price: Low to High</option>
+              <option value="price_desc">Price: High to Low</option>
+              <option value="duration">Duration: Shortest</option>
+              <option value="departure">Departure: Earliest</option>
+            </select>
+            <button type="button" class="btn btn-outline" id="resetFiltersBtn" style="padding: 0.45rem 0.85rem; font-size: 0.82rem;">
+              Reset Filters
+            </button>
+            <button type="button" class="btn btn-outline" id="btnOpenPriceTrends" style="padding: 0.45rem 0.85rem; font-size: 0.82rem; margin-left: 0.4rem; border-color: var(--primary); color: var(--primary); font-weight: 600;">
+              📊 Price Trends &amp; Freeze
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="flightLoadingState" class="state-container" style="display: none;" role="status" aria-live="polite">
+          <div class="spinner"></div>
+          <div class="state-title">Searching Available Flights...</div>
+          <p class="state-desc">Scanning multiple airline schedules for the best fares and routes across our network.</p>
+        </div>
+
+        <!-- Empty Results State -->
+        <div id="flightEmptyState" class="state-container" style="display: none;">
+          <div class="state-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.75">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <div class="state-title">No Flights Found</div>
+          <p class="state-desc" id="emptyStateMsg">We couldn't find any flights matching your current filter criteria. Try expanding your price range, toggling layovers, or searching a different date.</p>
+          <button type="button" class="btn btn-primary" id="emptyResetBtn" style="display: inline-flex;">Reset Filters</button>
+        </div>
+
+        <!-- Error State -->
+        <div id="flightErrorState" class="state-container" style="display: none;" role="alert">
+          <div class="state-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.75">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="state-title">Search Error</div>
+          <p class="state-desc" id="flightErrorMsg">Unable to retrieve flight data at this moment. Please check your connection and try again.</p>
+          <button type="button" class="btn btn-secondary" id="flightErrorRetryBtn" style="display: inline-flex;">Retry Search</button>
+        </div>
+
+        <!-- Dynamic Flight Cards List -->
+        <div class="flight-results-grid" id="flightCardsList" aria-live="polite">
+          <!-- Populated dynamically via JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Destinations Section -->
+    <section class="section" id="destinationsSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Curated Getaways</span>
+          <h2 class="section-title">Trending Worldwide Destinations</h2>
+          <p class="section-subtitle">
+            From Mediterranean coasts to buzzing metropolis skylines, explore our travelers' top destinations for 2026.
+          </p>
+        </div>
+
+        <div class="destinations-grid">
+          <!-- Destination 1: Santorini -->
+          <article class="destination-card">
+            <div class="destination-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80" alt="Santorini, Greece" class="destination-image" loading="lazy">
+              <span class="card-badge">Popular Choice</span>
+              <button type="button" class="card-like-btn" aria-label="Add to wishlist" onclick="this.classList.toggle('active')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="destination-content">
+              <div class="destination-location">
+                <h3 class="destination-city">Santorini</h3>
+                <span class="destination-country">Greece</span>
+              </div>
+              <p class="destination-tagline">Cyclades Island Paradise</p>
+              <div class="destination-meta-row">
+                <span class="meta-rating">★ <strong>4.96</strong> (1,840)</span>
+                <span class="meta-flight-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>6h 20m</span>
+                </span>
+              </div>
+              <div class="destination-footer">
+                <div class="destination-price-box">
+                  <span class="price-sub">Starting from</span>
+                  <div class="price-amount">$429</div>
+                </div>
+                <button type="button" class="btn-book-sm" onclick="window.exploreDestination('Santorini (JTR)')">Explore Flights</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Destination 2: Tokyo -->
+          <article class="destination-card">
+            <div class="destination-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80" alt="Tokyo, Japan" class="destination-image" loading="lazy">
+              <span class="card-badge trending">Trending Now</span>
+              <button type="button" class="card-like-btn" aria-label="Add to wishlist" onclick="this.classList.toggle('active')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="destination-content">
+              <div class="destination-location">
+                <h3 class="destination-city">Tokyo</h3>
+                <span class="destination-country">Japan</span>
+              </div>
+              <p class="destination-tagline">Shinjuku & Shibuya Neon Lights</p>
+              <div class="destination-meta-row">
+                <span class="meta-rating">★ <strong>4.94</strong> (2,950)</span>
+                <span class="meta-flight-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>13h 45m</span>
+                </span>
+              </div>
+              <div class="destination-footer">
+                <div class="destination-price-box">
+                  <span class="price-sub">Starting from</span>
+                  <div class="price-amount">$649</div>
+                </div>
+                <button type="button" class="btn-book-sm" onclick="window.exploreDestination('Tokyo (HND)')">Explore Flights</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Destination 3: Paris -->
+          <article class="destination-card">
+            <div class="destination-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80" alt="Paris, France" class="destination-image" loading="lazy">
+              <span class="card-badge">Top Romantic</span>
+              <button type="button" class="card-like-btn" aria-label="Add to wishlist" onclick="this.classList.toggle('active')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="destination-content">
+              <div class="destination-location">
+                <h3 class="destination-city">Paris</h3>
+                <span class="destination-country">France</span>
+              </div>
+              <p class="destination-tagline">The City of Light & Art</p>
+              <div class="destination-meta-row">
+                <span class="meta-rating">★ <strong>4.91</strong> (3,420)</span>
+                <span class="meta-flight-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>7h 50m</span>
+                </span>
+              </div>
+              <div class="destination-footer">
+                <div class="destination-price-box">
+                  <span class="price-sub">Starting from</span>
+                  <div class="price-amount">$389</div>
+                </div>
+                <button type="button" class="btn-book-sm" onclick="window.exploreDestination('Paris (CDG)')">Explore Flights</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Destination 4: Bali -->
+          <article class="destination-card">
+            <div class="destination-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali, Indonesia" class="destination-image" loading="lazy">
+              <span class="card-badge trending">20% Off Flights</span>
+              <button type="button" class="card-like-btn" aria-label="Add to wishlist" onclick="this.classList.toggle('active')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="destination-content">
+              <div class="destination-location">
+                <h3 class="destination-city">Bali</h3>
+                <span class="destination-country">Indonesia</span>
+              </div>
+              <p class="destination-tagline">Tropical Sands & Lush Rainforests</p>
+              <div class="destination-meta-row">
+                <span class="meta-rating">★ <strong>4.98</strong> (2,190)</span>
+                <span class="meta-flight-time">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>18h 10m</span>
+                </span>
+              </div>
+              <div class="destination-footer">
+                <div class="destination-price-box">
+                  <span class="price-sub">Starting from</span>
+                  <div class="price-amount">$520</div>
+                </div>
+                <button type="button" class="btn-book-sm" onclick="window.exploreDestination('Bali (DPS)')">Explore Flights</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Hotels Section -->
+    <section class="section" id="hotelsSection" style="background: #f8fafc;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Curated Stays &amp; Escapes</span>
+          <h2 class="section-title">Expanded Hotel Recommendations</h2>
+          <p class="section-subtitle">
+            Explore 5-star properties, boutique suites, and top-rated stays across worldwide destinations with verified availability.
+          </p>
+        </div>
+
+        <!-- 1. Hotel Category Navigation Pills -->
+        <div class="category-filter-pills" id="hotelCategoryPills" role="tablist" aria-label="Hotel Categories">
+          <button type="button" class="category-pill active" data-cat="ALL" role="tab" aria-selected="true">All Stays</button>
+          <button type="button" class="category-pill" data-cat="TOP_RATED" role="tab" aria-selected="false">🌟 Top-Rated Hotels</button>
+          <button type="button" class="category-pill" data-cat="BEST_VALUE" role="tab" aria-selected="false">🏷️ Best Value Stays</button>
+          <button type="button" class="category-pill" data-cat="LUXURY" role="tab" aria-selected="false">👑 Luxury Hotels</button>
+          <button type="button" class="category-pill" data-cat="FAMILY_FRIENDLY" role="tab" aria-selected="false">👨‍👩‍👧 Family-Friendly</button>
+          <button type="button" class="category-pill" data-cat="BUSINESS" role="tab" aria-selected="false">💼 Business Hotels</button>
+          <button type="button" class="category-pill" data-cat="RESORTS" role="tab" aria-selected="false">🏖️ Resorts &amp; Getaways</button>
+          <button type="button" class="category-pill" data-cat="RECOMMENDED" role="tab" aria-selected="false">✨ Recommended for You</button>
+        </div>
+
+        <!-- 2. Hotel Filtering & Sorting Toolbar -->
+        <div class="hotel-filter-toolbar" id="hotelFilterToolbar">
+          <div class="hotel-filter-group">
+            <div>
+              <label for="hotelLocationFilter" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 2px;">Destination:</label>
+              <select id="hotelLocationFilter" class="toolbar-select">
+                <option value="ALL">All Destinations</option>
+                <option value="Santorini">Santorini, Greece</option>
+                <option value="Tokyo">Tokyo, Japan</option>
+                <option value="Paris">Paris, France</option>
+                <option value="Dubai">Dubai, UAE</option>
+                <option value="Bali">Bali, Indonesia</option>
+                <option value="Kyoto">Kyoto, Japan</option>
+                <option value="Interlaken">Interlaken, Switzerland</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hotelPriceFilter" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 2px;">Max Nightly Rate: <strong id="hotelPriceVal" style="color: var(--primary);">$500</strong></label>
+              <input type="range" id="hotelPriceFilter" min="100" max="600" step="25" value="600" style="width: 130px; accent-color: var(--primary);">
+            </div>
+
+            <div>
+              <label for="hotelRatingFilter" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 2px;">Min Rating:</label>
+              <select id="hotelRatingFilter" class="toolbar-select">
+                <option value="ALL">Any Rating</option>
+                <option value="9.5">9.5+ Exceptional</option>
+                <option value="9.7">9.7+ World-Class</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hotelAmenityFilter" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 2px;">Amenity:</label>
+              <select id="hotelAmenityFilter" class="toolbar-select">
+                <option value="ALL">All Amenities</option>
+                <option value="Pool">Pool / Infinity Pool</option>
+                <option value="Spa">Boutique Spa</option>
+                <option value="Beach">Private Beach</option>
+                <option value="Breakfast">Breakfast Included</option>
+                <option value="WiFi">High-Speed WiFi</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.5rem; align-items: flex-end;">
+            <div>
+              <label for="hotelSortFilter" style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 2px;">Sort by:</label>
+              <select id="hotelSortFilter" class="toolbar-select">
+                <option value="recommended">Recommended Order</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+                <option value="rating_desc">Highest Guest Rating</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-outline" id="btnResetHotelFilters" style="padding: 0.5rem 0.85rem; font-size: 0.82rem;">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Dynamic Hotels Grid -->
+        <div class="hotels-grid" id="hotelsCardsGrid" aria-live="polite">
+          <!-- Populated dynamically via JS from /api/hotels -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Promotional Deal Banner -->
+    <section class="section" id="dealsSection" style="padding-top: 2rem;">
+      <div class="container">
+        <div class="promo-banner">
+          <div>
+            <span class="promo-tag">Limited Time Promotion</span>
+            <h2 class="promo-title">Voyager VIP Pass: Unlock 30% Off All International Flight Bookings</h2>
+            <p class="promo-desc">
+              Book your dream vacation before Sunday and receive complimentary airport lounge passes, prioritized boarding, and zero ticket alteration fees.
+            </p>
+            <button type="button" class="btn btn-accent" onclick="window.applyPromoCode('VOYAGE30')">
+              Claim Discount Now &rarr;
+            </button>
+          </div>
+          <div class="promo-card-action">
+            <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em;">Use Promo Coupon</p>
+            <div class="code-box" id="promoCodeText">VOYAGE30</div>
+            <button type="button" class="btn btn-outline-light" id="promoCopyBtn" style="width: 100%;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Code</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- VoyageX VIP Deals Hub -->
+        <div style="margin-top: 3.5rem;">
+          <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+              <div>
+                <span class="section-tag" style="background: rgba(245, 158, 11, 0.15); color: #d97706; border-color: rgba(245, 158, 11, 0.3);">Curated Member Perks</span>
+                <h2 class="section-title" style="margin-top: 0.25rem;">Exclusive VIP Travel Deals &amp; Bundles</h2>
+                <p class="section-subtitle" style="margin: 0;">
+                  Handpicked luxury escapes, dual flight+hotel packages, and last-minute deals with transparent calculated savings.
+                </p>
+              </div>
+              <button type="button" class="btn btn-outline" id="btnExploreMembershipTiers" style="border-color: var(--primary); color: var(--primary); font-weight: 700;">
+                👑 Compare VIP Membership Tiers
+              </button>
+            </div>
+          </div>
+
+          <!-- VIP Deal Category Filter Pills -->
+          <div class="category-filter-pills" id="dealCategoryPills" role="tablist" aria-label="VIP Deal Categories" style="margin-bottom: 1.75rem;">
+            <button type="button" class="category-pill active" data-dealcat="ALL" role="tab" aria-selected="true">All VIP Deals</button>
+            <button type="button" class="category-pill" data-dealcat="LUXURY_ESCAPES" role="tab" aria-selected="false">✨ Luxury Escapes</button>
+            <button type="button" class="category-pill" data-dealcat="FLIGHT_HOTEL_BUNDLES" role="tab" aria-selected="false">✈️+🏨 Flight &amp; Hotel Bundles</button>
+            <button type="button" class="category-pill" data-dealcat="WEEKEND_GETAWAYS" role="tab" aria-selected="false">🏖️ Weekend Getaways</button>
+            <button type="button" class="category-pill" data-dealcat="BUSINESS_OFFERS" role="tab" aria-selected="false">💼 Business Travel</button>
+            <button type="button" class="category-pill" data-dealcat="EARLY_BOOKING" role="tab" aria-selected="false">📅 Early Booking</button>
+            <button type="button" class="category-pill" data-dealcat="LAST_MINUTE" role="tab" aria-selected="false">⚡ Last-Minute Deals</button>
+          </div>
+
+          <!-- VIP Deals Cards Grid -->
+          <div class="vip-deals-grid" id="vipDealsGrid" aria-live="polite">
+            <!-- Dynamically populated via JS from /api/deals -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="whyUsSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Traveler Experiences</span>
+          <h2 class="section-title">Loved by Over 100,000 Adventurers</h2>
+          <p class="section-subtitle">
+            Read authentic reviews from frequent flyers and families who booked their unforgettable journeys with us.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "VoyageX made our honeymoon flight booking to Santorini completely seamless. When our domestic connecting flight was delayed, their support rep rebooked us in under 10 minutes!"
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Elena Rostova" class="author-avatar">
+              <div class="author-meta">
+                <h5>Elena Rostova</h5>
+                <span>Travelled to Santorini, Greece</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "The price comparison and zero hidden fees are genuine. I saved $320 on two round-trip business class tickets from JFK to Tokyo compared to other major booking portals."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Marcus Chen" class="author-avatar">
+              <div class="author-meta">
+                <h5>Marcus Chen</h5>
+                <span>Travelled to Tokyo, Japan</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div>
+              <div class="testimonial-stars">★★★★★</div>
+              <p class="testimonial-quote">
+                "Clean interface, fast checkout, and exceptional hotel recommendations. The boutique stay in Paris was beyond picturesque. Definitely our go-to travel app from now on."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Chloe Davenport" class="author-avatar">
+              <div class="author-meta">
+                <h5>Chloe Davenport</h5>
+                <span>Travelled to Paris, France</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Flight Status Board Section -->
+    <section class="section" id="flightStatusSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Real-Time Flight Tracker</span>
+          <h2 class="section-title">Live Flight Operations &amp; Status</h2>
+          <p class="section-subtitle">
+            Track real-time departures, arrivals, terminal gates, weather delays, and subscribe for instant notifications.
+          </p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="status-controls-bar" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--surface); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border);">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="statusFilterPills">
+            <button type="button" class="btn btn-primary status-filter-btn active" data-filter="ALL" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">All Flights</button>
+            <button type="button" class="btn btn-outline status-filter-btn" data-filter="ON_TIME" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">On Time</button>
+            <button type="button" class="btn btn-outline status-filter-btn" data-filter="DELAYED" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">Delayed</button>
+            <button type="button" class="btn btn-outline status-filter-btn" data-filter="BOARDING" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">Boarding</button>
+            <button type="button" class="btn btn-outline status-filter-btn" data-filter="LANDED" style="padding: 0.35rem 0.85rem; font-size: 0.82rem;">Landed</button>
+          </div>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="statusSearchInput" placeholder="Search by flight (e.g. AI-101 or DXB)..." style="padding: 0.45rem 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; width: 260px; outline: none;">
+            <button type="button" class="btn btn-outline" id="btnRefreshStatus" style="padding: 0.45rem 0.75rem; font-size: 0.85rem;" title="Refresh live status">⟳</button>
+          </div>
+        </div>
+
+        <!-- Flight Status Cards Grid -->
+        <div id="flightStatusGrid" class="flight-status-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;">
+          <!-- Dynamically populated via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Personalized Recommendations Section -->
+    <section class="section" id="recommendationsSection" style="background: #f8fafc;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">AI Travel Matching Engine</span>
+          <h2 class="section-title">Personalized Escapes Tailored for You</h2>
+          <p class="section-subtitle">
+            Choose your vacation style and preferred vibe to discover curated itineraries with transparent reasoning.
+          </p>
+        </div>
+
+        <!-- Quiz Selector Pills -->
+        <div class="rec-quiz-card" style="background: #fff; padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+          <div style="margin-bottom: 1rem;">
+            <strong style="font-size: 0.95rem; color: var(--secondary); display: block; margin-bottom: 0.5rem;">1. Select Your Travel Style:</strong>
+            <div id="stylePillsGroup" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+              <button type="button" class="quiz-pill active" data-type="style" data-val="Romantic">💑 Romantic Escapes</button>
+              <button type="button" class="quiz-pill" data-type="style" data-val="Adventure">⛰️ Thrill &amp; Adventure</button>
+              <button type="button" class="quiz-pill" data-type="style" data-val="Luxury">✨ 5-Star Luxury</button>
+              <button type="button" class="quiz-pill" data-type="style" data-val="Family">👨‍👩‍👧‍👦 Family Holidays</button>
+              <button type="button" class="quiz-pill" data-type="style" data-val="Solo">🎒 Solo Backpacker</button>
+            </div>
+          </div>
+          <div>
+            <strong style="font-size: 0.95rem; color: var(--secondary); display: block; margin-bottom: 0.5rem;">2. Preferred Setting &amp; Vibe:</strong>
+            <div id="vibePillsGroup" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+              <button type="button" class="quiz-pill active" data-type="vibe" data-val="Beach">🏖️ Sun, Sand &amp; Sea</button>
+              <button type="button" class="quiz-pill" data-type="vibe" data-val="Mountain">🏔️ Alpine &amp; Nature</button>
+              <button type="button" class="quiz-pill" data-type="vibe" data-val="City">🏙️ Historic Cities &amp; Culture</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommendations Grid -->
+        <div id="recommendationsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+          <!-- Dynamically populated via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews & Ratings Section -->
+    <section class="section" id="reviewsSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Community Feedback</span>
+          <h2 class="section-title">Verified Customer Reviews &amp; Ratings</h2>
+          <p class="section-subtitle">
+            Authentic guest experiences, verified reviews, and official airline/hotel response notes.
+          </p>
+        </div>
+
+        <!-- Review Summary Bar -->
+        <div class="reviews-summary-card" style="background: var(--surface); padding: 1.75rem; border-radius: 16px; border: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between; margin-bottom: 2rem;">
+          <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 3rem; font-weight: 800; color: var(--secondary); line-height: 1;">4.9</div>
+              <div style="color: #f59e0b; font-size: 1.1rem; margin-top: 4px;">★★★★★</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">Based on 1,480 reviews</div>
+            </div>
+            <div style="border-left: 1px solid var(--border); padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem; min-width: 200px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span>Cleanliness</span><strong>4.9 / 5</strong></div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span>Service &amp; Staff</span><strong>4.8 / 5</strong></div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span>Value for Money</span><strong>4.7 / 5</strong></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <select id="reviewRatingFilter" style="padding: 0.5rem 0.85rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: #fff;">
+              <option value="ALL">All Star Ratings</option>
+              <option value="5">5 Stars Only</option>
+              <option value="4">4 Stars Only</option>
+              <option value="3">3 Stars Only</option>
+            </select>
+            <button type="button" class="btn btn-primary" id="btnOpenWriteReview" style="padding: 0.55rem 1.25rem; font-size: 0.88rem;">
+              ✍ Write a Review
+            </button>
+          </div>
+        </div>
+
+        <!-- Reviews List Container -->
+        <div id="reviewsListGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem;">
+          <!-- Dynamically populated via main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-box">
+          <h3>Unlock Secret Fares &amp; Travel Deals</h3>
+          <p>
+            Join 250,000+ wanderlust travelers receiving our weekly price drops, hidden gem itineraries, and exclusive airline partner promo codes.
+          </p>
+          <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); window.handleNewsletterSubmit();">
+            <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email address..." required aria-label="Email address for travel deals">
+            <button type="submit" class="btn btn-accent" id="newsletterSubmitBtn" style="white-space: nowrap;">
+              Subscribe
+            </button>
+          </form>
+          <div id="newsletterSuccessBox" class="newsletter-feedback" style="display: none; margin-top: 1rem; color: #10b981; font-weight: 600; text-align: center;">
+            ✓ Thank you for subscribing! Your 15% discount voucher (WELCOME15) has been registered.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo" style="margin-bottom: 0.5rem; display: inline-flex;">
+            <div class="logo-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+              </svg>
+            </div>
+            <span>Voyage<span class="logo-highlight">X</span></span>
+          </a>
+          <p>
+            Your premier modern gateway to worldwide flights, boutique resorts, and bespoke holiday experiences. Travel smarter with zero hidden fees.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Twitter">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="#searchSection">Flight Schedules</a></li>
+            <li><a href="#destinationsSection">Top Destinations</a></li>
+            <li><a href="#hotelsSection">Luxury Stays</a></li>
+            <li><a href="#dealsSection">Summer Deals</a></li>
+            <li><a href="#whyUsSection">Travel Guides</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Popular Routes</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="window.selectDestination('Paris (CDG)')">New York &rarr; Paris</a></li>
+            <li><a href="javascript:void(0)" onclick="window.selectDestination('Tokyo (HND)')">Los Angeles &rarr; Tokyo</a></li>
+            <li><a href="javascript:void(0)" onclick="window.selectDestination('Santorini (JTR)')">London &rarr; Santorini</a></li>
+            <li><a href="javascript:void(0)" onclick="window.selectDestination('Dubai (DXB)')">Singapore &rarr; Dubai</a></li>
+            <li><a href="javascript:void(0)" onclick="window.selectDestination('Bali (DPS)')">Sydney &rarr; Bali</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Support & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#">Help Center & FAQ</a></li>
+            <li><a href="#">Baggage Guidelines</a></li>
+            <li><a href="#">Cancellation Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 VoyageX Travel Inc. All rights reserved. Professional travel application.</p>
+        <p>Spring Boot 4.0.9 &bull; Java 25 &bull; Static Web &bull; Responsive Design</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking Confirmation Modal Dialog -->
+  <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <!-- 1. Booking Form & Summary View -->
+      <div id="bookingFormView">
+        <div class="modal-header">
+          <h3 id="modalTitle">Confirm Flight Selection</h3>
+          <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Flight Recap Box -->
+          <div class="flight-recap-box">
+            <div class="recap-airline">
+              <div class="recap-airline-info">
+                <div class="airline-badge" id="recapAirlineBadge">AI</div>
+                <div>
+                  <h4 id="recapAirlineName" style="font-size: 1rem; font-weight: 700; color: var(--secondary); margin-bottom: 2px;">Air India</h4>
+                  <span id="recapFlightMeta" style="font-size: 0.8rem; color: var(--text-muted);">AI 101 &bull; Boeing 787-8</span>
+                </div>
+              </div>
+              <span class="seats-badge" id="recapSeats">5 seats left</span>
+            </div>
+
+            <div class="recap-route">
+              <div class="recap-point">
+                <h5 id="recapDepartTime">06:00 AM</h5>
+                <span id="recapOrigin">DEL</span>
+              </div>
+              <div class="recap-track">
+                <div class="flight-duration-track">
+                  <div class="duration-label" id="recapDuration">2h 15m</div>
+                  <div class="duration-line"><div class="duration-plane-icon">✈</div></div>
+                  <div class="stops-label" id="recapStops">Non-stop</div>
+                </div>
+              </div>
+              <div class="recap-point">
+                <h5 id="recapArriveTime">08:15 AM</h5>
+                <span id="recapDest">BOM</span>
+              </div>
+            </div>
+
+            <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; justify-content: space-between; border-top: 1px dashed var(--border); padding-top: 0.6rem; margin-top: 0.6rem;">
+              <span>Date: <strong id="recapDate" style="color: var(--secondary);">2026-11-01</strong></span>
+              <span>Passengers: <strong id="recapPax" style="color: var(--secondary);">1 Traveler</strong></span>
+            </div>
+          </div>
+
+          <!-- Fare Breakdown Table -->
+          <table class="fare-table">
+            <tbody>
+              <tr>
+                <td>Base Fare (<span id="farePaxCount">1</span> passenger<span id="farePaxPlural"></span>)</td>
+                <td><strong id="fareBaseAmount">$120</strong></td>
+              </tr>
+              <tr>
+                <td>Taxes &amp; Airport Surcharges (12%)</td>
+                <td><strong id="fareTaxesAmount">$14</strong></td>
+              </tr>
+              <tr class="total-row">
+                <td>Total Fare</td>
+                <td class="total-amount" id="fareTotalAmount">$134</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Demo Disclaimer Notice -->
+          <div class="demo-notice-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <div>
+              <strong>Demonstration Booking Mode:</strong>
+              This simulated reservation will not charge your card or issue a valid airline ticket. All flight offers are simulated for demonstration.
+            </div>
+          </div>
+
+          <!-- Traveler Information Form -->
+          <form id="travelerBookingForm" onsubmit="return false;">
+            <div class="traveler-form-grid">
+              <div class="modal-input-field full-width">
+                <label for="travelerName">Lead Passenger Full Name *</label>
+                <input type="text" id="travelerName" placeholder="e.g. Rahul Sharma" required autocomplete="name">
+              </div>
+              <div class="modal-input-field">
+                <label for="travelerEmail">Email Address *</label>
+                <input type="email" id="travelerEmail" placeholder="e.g. rahul@example.com" required autocomplete="email">
+              </div>
+              <div class="modal-input-field">
+                <label for="travelerPhone">Phone Number *</label>
+                <input type="tel" id="travelerPhone" placeholder="e.g. +91 98765 43210" required autocomplete="tel">
+              </div>
+            </div>
+
+            <!-- Seat Selection Option -->
+            <div style="margin: 0.75rem 0; text-align: center; border: 1px dashed var(--border); border-radius: 8px; padding: 0.75rem; background: #f8fafc;">
+              <button type="button" class="btn btn-outline" id="btnChooseSeatInBooking" style="width: 100%; font-size: 0.88rem; padding: 0.5rem; border-color: var(--primary); color: var(--primary); font-weight: 600;">
+                💺 Pick / Change Cabin Seat (Interactive Map)
+              </button>
+              <div id="bookingSelectedSeatBadge" style="display: none; margin-top: 0.4rem; font-size: 0.82rem; color: #10b981; font-weight: 600;">
+                Assigned Seat: <span id="bookingSelectedSeatVal">3B</span> (<span id="bookingSelectedSeatTier">Preferred</span>)
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+              <button type="button" class="btn btn-outline" id="btnCancelBooking">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="btnConfirmBooking">Confirm Demonstration Booking</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- 2. Booking Success Confirmation View -->
+      <div id="bookingSuccessView" style="display: none;">
+        <div class="modal-body">
+          <div class="confirmation-card">
+            <div class="confirmed-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--secondary); margin-bottom: 0.5rem;">
+              Demonstration Booking Confirmed!
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+              Thank you, <strong id="confTravelerName" style="color: var(--secondary);">Traveler</strong>. Your simulated itinerary has been reserved.
+            </p>
+
+            <div class="booking-ref-box">
+              <span>Booking Reference</span>
+              <strong id="confBookingRef">VX-12345</strong>
+            </div>
+
+            <div class="flight-recap-box" style="text-align: left; margin: 1rem 0 1.5rem 0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                <span style="color: var(--text-muted);">Route:</span>
+                <strong id="confRoute" style="color: var(--secondary);">DEL &rarr; BOM</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                <span style="color: var(--text-muted);">Flight:</span>
+                <strong id="confFlight" style="color: var(--secondary);">Air India (AI 101)</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                <span style="color: var(--text-muted);">Departure:</span>
+                <strong id="confDepartDate" style="color: var(--secondary);">2026-11-01</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                <span style="color: var(--text-muted);">Passengers:</span>
+                <strong id="confPassengers" style="color: var(--secondary);">1 Passenger</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.95rem; border-top: 1px dashed var(--border); padding-top: 0.5rem; margin-top: 0.5rem;">
+                <span style="color: var(--text-muted);">Total Paid (Mock):</span>
+                <strong id="confTotalFare" style="color: var(--primary); font-size: 1.15rem;">$134</strong>
+              </div>
+            </div>
+
+            <div class="demo-notice-box" style="text-align: left;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <span>This is a demonstration booking on VoyageX. No financial transaction has taken place and no ticket has been issued.</span>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="btnBookingDone" style="width: 100%; margin-top: 1rem;">
+              Book Another Flight
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotel Booking Modal -->
+  <div class="modal-overlay" id="hotelModal" role="dialog" aria-modal="true" aria-labelledby="hotelModalTitle">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="hotelModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">Reserve Luxury Stay</h3>
+          <span id="hotelModalSubtitle" style="font-size: 0.82rem; color: var(--text-muted);">Santorini, Greece</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="hotelModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 1rem;">
+          <label style="font-size: 0.85rem; font-weight: 700; color: var(--secondary); display: block; margin-bottom: 0.5rem;">Select Room Category:</label>
+          <div id="hotelRoomsList" class="hotel-rooms-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+
+        <form id="hotelReservationForm" onsubmit="return false;" style="border-top: 1px solid var(--border); padding-top: 1rem;">
+          <div class="traveler-form-grid">
+            <div class="modal-input-field full-width">
+              <label for="hotelGuestName">Guest Full Name *</label>
+              <input type="text" id="hotelGuestName" value="Arun Patel" required>
+            </div>
+            <div class="modal-input-field">
+              <label for="hotelCheckIn">Check-In Date *</label>
+              <input type="date" id="hotelCheckIn" required>
+            </div>
+            <div class="modal-input-field">
+              <label for="hotelNights">Nights *</label>
+              <select id="hotelNights">
+                <option value="1">1 Night</option>
+                <option value="2">2 Nights</option>
+                <option value="3" selected>3 Nights</option>
+                <option value="5">5 Nights</option>
+                <option value="7">7 Nights</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 0.75rem 1rem; border-radius: 8px; margin: 1rem 0;">
+            <span style="font-size: 0.9rem; color: var(--text-muted);">Total Estimated Stay:</span>
+            <strong id="hotelTotalFare" style="font-size: 1.3rem; color: var(--primary);">$960</strong>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+            <button type="button" class="btn btn-outline" id="btnCancelHotelModal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btnConfirmHotelStay">Book Room (Demo)</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Cabin Seat Map Modal -->
+  <div class="modal-overlay" id="seatMapModal" role="dialog" aria-modal="true" aria-labelledby="seatModalTitle">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="seatModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">Aircraft Seat Selection</h3>
+          <span id="seatModalSubtitle" style="font-size: 0.82rem; color: var(--text-muted);">Boeing 787-8 Dreamliner &bull; 6x6 Cabin Configuration</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="seatModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Seat Map Legend -->
+        <div class="seat-legend" style="display: flex; gap: 1rem; justify-content: center; font-size: 0.8rem; margin-bottom: 1rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 4px;"><span class="seat-sample seat-avail"></span> Available ($0)</div>
+          <div style="display: flex; align-items: center; gap: 4px;"><span class="seat-sample seat-pref"></span> Preferred ($25)</div>
+          <div style="display: flex; align-items: center; gap: 4px;"><span class="seat-sample seat-exit"></span> Extra Legroom ($45)</div>
+          <div style="display: flex; align-items: center; gap: 4px;"><span class="seat-sample seat-selected"></span> Selected</div>
+          <div style="display: flex; align-items: center; gap: 4px;"><span class="seat-sample seat-occupied"></span> Occupied</div>
+        </div>
+
+        <!-- Fuselage Container with 6 Rows x 6 Seats with aisle -->
+        <div class="aircraft-fuselage" style="background: #f1f5f9; padding: 1.5rem 1rem; border-radius: 20px; border: 2px solid var(--border); max-width: 440px; margin: 0 auto;">
+          <div style="text-align: center; font-size: 0.75rem; color: var(--text-muted); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 1rem;">FRONT OF AIRCRAFT / COCKPIT ▲</div>
+          <div id="seatMapGrid" class="seat-grid">
+            <!-- Dynamically generated via JS -->
+          </div>
+        </div>
+
+        <!-- Selected Seat Summary -->
+        <div style="margin-top: 1.25rem; padding: 0.75rem 1rem; background: var(--surface); border-radius: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">Selected Seat:</div>
+            <strong id="seatMapSelectedCode" style="font-size: 1.1rem; color: var(--secondary);">None</strong>
+            <span id="seatMapSelectedTier" style="font-size: 0.8rem; color: var(--text-muted); margin-left: 4px;"></span>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.82rem; color: var(--text-muted);">Seat Surcharge:</div>
+            <strong id="seatMapPrice" style="font-size: 1.2rem; color: var(--primary);">$0</strong>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+          <button type="button" class="btn btn-outline" id="btnCancelSeatMap">Cancel</button>
+          <button type="button" class="btn btn-primary" id="btnConfirmSeatSelection">Confirm Seat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Pricing & 48-Hour Price Freeze Modal -->
+  <div class="modal-overlay" id="pricingTrendModal" role="dialog" aria-modal="true" aria-labelledby="pricingModalTitle">
+    <div class="modal-card" style="max-width: 600px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="pricingModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">Fare Intelligence &amp; Volatility</h3>
+          <span id="pricingModalSubtitle" style="font-size: 0.82rem; color: var(--text-muted);">Route DEL &rarr; BOM &bull; 7-Day Trend Analysis</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="pricingModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Volatility Gauge Cards -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Simulated Route Demand</div>
+            <div id="pricingDemandBadge" style="font-size: 1.1rem; font-weight: 800; color: #f59e0b; margin-top: 2px;">HIGH DEMAND (85/100)</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem;">
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Forecast Advice</div>
+            <div id="pricingAdviceText" style="font-size: 1.1rem; font-weight: 800; color: #ef4444; margin-top: 2px;">Fares Likely to Rise 15%</div>
+          </div>
+        </div>
+
+        <!-- 7-Day Price History Volatility Chart / Bars -->
+        <div style="margin-bottom: 1.5rem;">
+          <label style="font-size: 0.85rem; font-weight: 700; color: var(--secondary); display: block; margin-bottom: 0.75rem;">7-Day Price Volatility Track:</label>
+          <div id="priceTrendBars" class="price-trend-chart" style="display: flex; gap: 0.5rem; align-items: flex-end; height: 160px; background: #fafafa; padding: 1rem 0.5rem; border-radius: 12px; border: 1px solid var(--border);">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- 48-Hour Price Freeze Banner -->
+        <div class="price-freeze-banner" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #93c5fd; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+              <div style="font-size: 0.82rem; font-weight: 700; color: #1e40af; text-transform: uppercase; letter-spacing: 0.05em;">Lock This Fare Guarantee</div>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #1e3a8a; margin: 2px 0 4px 0;">48-Hour Price Freeze Guarantee</h4>
+              <p style="font-size: 0.82rem; color: #3b82f6; margin: 0;">Freeze current fare for $15 deposit. If price rises, we cover the difference; if it drops, you pay the lower fare!</p>
+            </div>
+            <div style="text-align: right; min-width: 90px;">
+              <span style="font-size: 0.75rem; color: #1e40af;">Deposit:</span>
+              <div style="font-size: 1.3rem; font-weight: 800; color: #1e40af;">$15</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" id="btnFreezeFareNow" style="margin-top: 1rem; width: 100%; background: #2563eb; border: none;">
+            🔒 Freeze Fare for 48 Hours
+          </button>
+        </div>
+
+        <!-- Freeze Confirmation Result Box -->
+        <div id="freezeSuccessBox" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 10px; padding: 1rem; text-align: center;">
+          <div style="font-size: 1.25rem; color: #059669; font-weight: 800;">✓ Fare Successfully Frozen!</div>
+          <div style="font-size: 0.88rem; color: #065f46; margin: 4px 0;">Freeze Token: <strong id="freezeTokenText">PF-98214</strong></div>
+          <div style="font-size: 0.8rem; color: #047857;">Guaranteed until: <strong id="freezeExpiryText">48 hours from now</strong>. Valid at checkout.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cancellation & Policy-Based Refund Modal -->
+  <div class="modal-overlay" id="cancellationModal" role="dialog" aria-modal="true" aria-labelledby="cancellationModalTitle">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="cancellationModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">Cancel Itinerary &amp; Request Refund</h3>
+          <span id="cancellationSubtitle" style="font-size: 0.82rem; color: var(--text-muted);">Booking Ref: VX-89210 &bull; Transparent Policy Calculation</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="cancellationModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Policy Tiers Explanation Accordion -->
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem; font-size: 0.8rem; margin-bottom: 1rem;">
+          <strong style="color: var(--secondary); display: block; margin-bottom: 4px;">Official Cancellation Refund Policy:</strong>
+          <ul style="padding-left: 1.2rem; margin: 0; color: var(--text-muted); line-height: 1.5;">
+            <li>&gt; 7 days prior: <strong>90% Refund</strong> (10% airline admin fee)</li>
+            <li>48h to 7 days: <strong>70% Refund</strong> (30% penalty)</li>
+            <li>24h to 48h: <strong>50% Refund</strong> (50% penalty)</li>
+            <li>&lt; 24 hours: <strong>25% Refund</strong> (airport taxes returned)</li>
+            <li>Medical waiver with valid document: <strong>100% Full Refund</strong></li>
+          </ul>
+        </div>
+
+        <form id="cancellationForm" onsubmit="return false;">
+          <div class="modal-input-field full-width" style="margin-bottom: 1rem;">
+            <label for="cancellationReasonSelect">Reason for Cancellation *</label>
+            <select id="cancellationReasonSelect" required style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 8px;">
+              <option value="Change of travel plans">Change of travel plans</option>
+              <option value="Schedule conflict or work emergency">Schedule conflict or work emergency</option>
+              <option value="Medical condition / emergency waiver">Medical condition / emergency waiver (Eligible for 100%)</option>
+              <option value="Flight schedule alteration by carrier">Flight schedule alteration by carrier</option>
+              <option value="Weather / Natural disruption">Weather / Natural disruption</option>
+            </select>
+          </div>
+
+          <!-- Refund Calculation Breakdown -->
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+              <span style="color: var(--text-muted);">Original Fare Paid:</span>
+              <strong id="calcOriginalFare">$450.00</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+              <span style="color: var(--text-muted);">Policy Applicable Tier:</span>
+              <strong id="calcPolicyTier" style="color: var(--secondary);">Tier 1 (&gt; 7 days prior)</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+              <span style="color: var(--text-muted);">Cancellation Admin Deduction:</span>
+              <strong id="calcCancellationFee" style="color: #ef4444;">-$45.00</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 1rem; border-top: 1px dashed var(--border); padding-top: 0.5rem; margin-top: 0.5rem;">
+              <span>Net Refund to Source:</span>
+              <strong id="calcNetRefund" style="color: #10b981; font-size: 1.25rem;">$405.00</strong>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+            <button type="button" class="btn btn-outline" id="btnCancelRefundModal">Nevermind</button>
+            <button type="submit" class="btn btn-accent" id="btnConfirmCancelRefund" style="background: #dc2626; color: #fff; border: none;">
+              Confirm Cancellation &amp; Refund
+            </button>
+          </div>
+        </form>
+
+        <div id="refundSuccessBox" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 10px; padding: 1.25rem; text-align: center; margin-top: 1rem;">
+          <div style="font-size: 1.2rem; color: #059669; font-weight: 800;">✓ Refund Request Approved!</div>
+          <div style="font-size: 0.9rem; color: #065f46; margin: 4px 0;">Refund Reference: <strong id="refundRefText">RF-73412</strong></div>
+          <div style="font-size: 0.82rem; color: #047857;">Net amount of <strong id="refundApprovedAmount">$405.00</strong> will be credited to original payment method within 3–5 business days.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Review Submission Modal -->
+  <div class="modal-overlay" id="reviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="reviewModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">Share Your Experience</h3>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Your feedback helps fellow travelers travel smarter</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="reviewModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="reviewSubmissionForm" onsubmit="return false;">
+          <!-- Star Rating Selector -->
+          <div style="text-align: center; margin-bottom: 1.25rem;">
+            <label style="font-size: 0.88rem; font-weight: 700; color: var(--secondary); display: block; margin-bottom: 4px;">Overall Rating</label>
+            <div id="starPickerGroup" style="font-size: 2rem; color: #cbd5e1; cursor: pointer; user-select: none;">
+              <span class="star-pick active" data-val="1">★</span>
+              <span class="star-pick active" data-val="2">★</span>
+              <span class="star-pick active" data-val="3">★</span>
+              <span class="star-pick active" data-val="4">★</span>
+              <span class="star-pick active" data-val="5">★</span>
+            </div>
+            <input type="hidden" id="reviewStarRatingVal" value="5">
+          </div>
+
+          <div class="traveler-form-grid">
+            <div class="modal-input-field">
+              <label for="reviewAuthorName">Your Name *</label>
+              <input type="text" id="reviewAuthorName" value="Arun Patel" required>
+            </div>
+            <div class="modal-input-field">
+              <label for="reviewItemName">Destination / Airline / Hotel *</label>
+              <input type="text" id="reviewItemName" value="Santorini Luxury Suites" required>
+            </div>
+            <div class="modal-input-field full-width">
+              <label for="reviewTitleInput">Review Title *</label>
+              <input type="text" id="reviewTitleInput" placeholder="e.g. Unbelievable cliffside views and warm service" required>
+            </div>
+            <div class="modal-input-field full-width">
+              <label for="reviewCommentsInput">Detailed Feedback *</label>
+              <textarea id="reviewCommentsInput" rows="3" placeholder="Tell us about the cabin comfort, food, customer care, and highlight moments..." required style="width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem; font-family: inherit; font-size: 0.88rem;"></textarea>
+            </div>
+            <div class="modal-input-field full-width">
+              <label for="reviewPhotoInput">Attach Trip Photo (JPEG/PNG &lt; 5MB)</label>
+              <input type="file" id="reviewPhotoInput" accept="image/jpeg,image/png,image/webp">
+              <span id="photoValidationMsg" style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-top: 4px;">Max file size 5MB. Verified uploads receive a community contributor badge.</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem;">
+            <button type="button" class="btn btn-outline" id="btnCancelReviewModal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmitReviewAction">Publish Review</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Sign In & Registration Modal -->
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-card" style="max-width: 480px;">
+      <!-- Tab Header Navigation -->
+      <div class="auth-tabs-nav" id="authTabsNav">
+        <button type="button" class="auth-tab-btn active" id="tabBtnSignIn">Sign In</button>
+        <button type="button" class="auth-tab-btn" id="tabBtnRegister">Create Account</button>
+        <button type="button" class="modal-close-btn" id="authModalCloseBtn" aria-label="Close dialog" style="margin-left: auto;">&times;</button>
+      </div>
+
+      <!-- Live Feedback Alert Banner -->
+      <div id="authAlertBanner" class="auth-alert" style="display: none;" role="alert"></div>
+
+      <!-- 1. Sign In Tab Panel -->
+      <div id="authSignInPanel" class="auth-panel active">
+        <div class="auth-header-copy">
+          <h3 id="authModalTitle" style="font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 4px;">Welcome Back</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Sign in to access your bookings, saved deals, and VIP perks.</p>
+        </div>
+
+        <form id="formSignIn" onsubmit="return false;" novalidate>
+          <div class="modal-input-field" style="margin-bottom: 1rem;">
+            <label for="loginEmail">Email Address *</label>
+            <input type="email" id="loginEmail" placeholder="e.g. arun.patel@example.com" required autocomplete="email">
+            <span class="field-error-msg" id="loginEmailError"></span>
+          </div>
+
+          <div class="modal-input-field" style="margin-bottom: 0.75rem;">
+            <label for="loginPassword">Password *</label>
+            <div class="pwd-input-wrap">
+              <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="btn-pwd-toggle" id="toggleLoginPwd" aria-label="Show password">
+                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+            <span class="field-error-msg" id="loginPasswordError"></span>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-bottom: 1.25rem;">
+            <a href="javascript:void(0)" id="linkForgotPassword" style="font-size: 0.82rem; color: var(--primary); font-weight: 600; text-decoration: none;">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnSignInSubmit" style="width: 100%; padding: 0.75rem; font-weight: 700; font-size: 0.95rem;">
+            Sign In
+          </button>
+        </form>
+
+        <div class="auth-divider">
+          <span>Or sign in with demo traveler</span>
+        </div>
+
+        <!-- Quick Demo Profiles -->
+        <div style="display: flex; flex-direction: column; gap: 0.65rem;">
+          <div class="demo-user-card" onclick="window.selectDemoUser('arun')" style="border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; display: flex; align-items: center; gap: 0.85rem; cursor: pointer; transition: all 0.2s;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #2563eb; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">AP</div>
+            <div style="flex: 1;">
+              <h5 style="margin: 0; font-size: 0.9rem; color: var(--secondary);">Arun Patel (Demo)</h5>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">arun.patel@example.com &bull; Gold Flyer</span>
+            </div>
+            <span class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Select</span>
+          </div>
+
+          <div class="demo-user-card" onclick="window.selectDemoUser('elena')" style="border: 1px solid var(--border); border-radius: 10px; padding: 0.75rem; display: flex; align-items: center; gap: 0.85rem; cursor: pointer; transition: all 0.2s;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #ec4899; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem;">ER</div>
+            <div style="flex: 1;">
+              <h5 style="margin: 0; font-size: 0.9rem; color: var(--secondary);">Elena Rostova (Demo)</h5>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">elena.rostova@example.com &bull; Platinum VIP</span>
+            </div>
+            <span class="btn btn-outline" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">Select</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Create Account Tab Panel -->
+      <div id="authRegisterPanel" class="auth-panel" style="display: none;">
+        <div class="auth-header-copy">
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 4px;">Join VoyageX</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Create an account for personalized flight and hotel recommendations.</p>
+        </div>
+
+        <form id="formRegister" onsubmit="return false;" novalidate>
+          <div class="modal-input-field" style="margin-bottom: 0.85rem;">
+            <label for="registerName">Full Name *</label>
+            <input type="text" id="registerName" placeholder="e.g. Maya Lin" required autocomplete="name">
+            <span class="field-error-msg" id="registerNameError"></span>
+          </div>
+
+          <div class="modal-input-field" style="margin-bottom: 0.85rem;">
+            <label for="registerEmail">Email Address *</label>
+            <input type="email" id="registerEmail" placeholder="e.g. maya.lin@example.com" required autocomplete="email">
+            <span class="field-error-msg" id="registerEmailError"></span>
+          </div>
+
+          <div class="modal-input-field" style="margin-bottom: 0.85rem;">
+            <label for="registerPassword">Password *</label>
+            <div class="pwd-input-wrap">
+              <input type="password" id="registerPassword" placeholder="At least 6 characters" required autocomplete="new-password">
+              <button type="button" class="btn-pwd-toggle" id="toggleRegisterPwd" aria-label="Show password">
+                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></line></svg>
+              </button>
+            </div>
+            <span class="field-error-msg" id="registerPasswordError"></span>
+          </div>
+
+          <div class="modal-input-field" style="margin-bottom: 0.85rem;">
+            <label for="registerConfirmPassword">Confirm Password *</label>
+            <div class="pwd-input-wrap">
+              <input type="password" id="registerConfirmPassword" placeholder="Re-enter password" required autocomplete="new-password">
+              <button type="button" class="btn-pwd-toggle" id="toggleRegisterConfirmPwd" aria-label="Show confirm password">
+                <svg class="eye-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <svg class="eye-closed" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></line></svg>
+              </button>
+            </div>
+            <span class="field-error-msg" id="registerConfirmPasswordError"></span>
+          </div>
+
+          <div class="modal-input-field" style="margin-bottom: 1.25rem;">
+            <label for="registerTierSelect">Initial Member Tier (Demo)</label>
+            <select id="registerTierSelect" style="width: 100%; padding: 0.6rem; border: 1px solid var(--border); border-radius: 8px;">
+              <option value="VoyageX Explorer">VoyageX Explorer (Free Standard)</option>
+              <option value="VoyageX Plus">VoyageX Plus (5% Perks)</option>
+              <option value="VoyageX Elite">VoyageX Elite (VIP Luxury)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnRegisterSubmit" style="width: 100%; padding: 0.75rem; font-weight: 700; font-size: 0.95rem;">
+            Create VoyageX Account
+          </button>
+        </form>
+      </div>
+
+      <!-- 3. Forgot Password Panel -->
+      <div id="authForgotPanel" class="auth-panel" style="display: none;">
+        <div class="auth-header-copy">
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-bottom: 4px;">Reset Password</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Enter your account email to receive a secure recovery code.</p>
+        </div>
+
+        <form id="formForgot" onsubmit="return false;" novalidate>
+          <div class="modal-input-field" style="margin-bottom: 1rem;">
+            <label for="forgotEmail">Email Address *</label>
+            <input type="email" id="forgotEmail" placeholder="e.g. arun.patel@example.com" required autocomplete="email">
+            <span class="field-error-msg" id="forgotEmailError"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btnForgotSubmit" style="width: 100%; padding: 0.75rem; font-weight: 700; font-size: 0.95rem;">
+            Send Password Reset Link
+          </button>
+        </form>
+
+        <div id="forgotSuccessBox" style="display: none; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 10px; padding: 1rem; text-align: center; margin-top: 1rem;">
+          <div style="font-size: 1.1rem; color: #059669; font-weight: 800;">✓ Reset Request Received!</div>
+          <p id="forgotSuccessText" style="font-size: 0.82rem; color: #065f46; margin: 6px 0 0 0;"></p>
+        </div>
+
+        <div style="text-align: center; margin-top: 1.25rem;">
+          <a href="javascript:void(0)" id="linkBackToSignIn" style="font-size: 0.85rem; color: var(--primary); font-weight: 600; text-decoration: none;">&larr; Back to Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hotel Details Modal -->
+  <div class="modal-overlay" id="hotelDetailsModal" role="dialog" aria-modal="true" aria-labelledby="hotelDetailsTitle">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="hotelDetailsTitle" style="font-size: 1.3rem; font-weight: 800; color: var(--secondary);">Hotel Details</h3>
+          <span id="hotelDetailsSubtitle" style="font-size: 0.85rem; color: var(--text-muted);">Destination &bull; Category</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="hotelDetailsCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top: 0;">
+        <div style="position: relative; border-radius: 14px; overflow: hidden; margin-bottom: 1.25rem; height: 260px;">
+          <img id="hotelDetailsImage" src="" alt="Hotel property preview" style="width: 100%; height: 100%; object-fit: cover;">
+          <span id="hotelDetailsCategoryBadge" class="card-badge" style="position: absolute; top: 12px; left: 12px;">Top Rated</span>
+          <span id="hotelDetailsAvailabilityBadge" class="avail-badge" style="position: absolute; bottom: 12px; right: 12px;">Verified Availability</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <div id="hotelDetailsRating" style="font-size: 0.95rem; font-weight: 700; color: #d97706;">★ 4.96 (1,840 verified reviews)</div>
+            <div id="hotelDetailsLocation" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Santorini, Greece</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.8rem; color: var(--text-muted);">From</div>
+            <div id="hotelDetailsPrice" style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">$320 <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-muted);">/ night</span></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <h5 style="font-size: 0.9rem; font-weight: 700; color: var(--secondary); margin-bottom: 4px;">About This Stay</h5>
+          <p id="hotelDetailsDesc" style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin: 0;">
+            Luxury cliffside suites overlooking the Aegean caldera.
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h5 style="font-size: 0.9rem; font-weight: 700; color: var(--secondary); margin-bottom: 6px;">Included Amenities &amp; Perks</h5>
+          <div id="hotelDetailsAmenities" class="hotel-amenities-chips" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; border-top: 1px solid var(--border); padding-top: 1rem;">
+          <button type="button" class="btn btn-outline" id="btnHotelDetailsBack">Close</button>
+          <button type="button" class="btn btn-primary" id="btnHotelDetailsBook">Select Room &amp; Dates &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIP Deal Details Modal -->
+  <div class="modal-overlay" id="vipDealModal" role="dialog" aria-modal="true" aria-labelledby="vipDealModalTitle">
+    <div class="modal-card" style="max-width: 660px;">
+      <div class="modal-header">
+        <div>
+          <span id="vipDealModalTag" class="section-tag" style="background: rgba(245, 158, 11, 0.15); color: #d97706; border-color: rgba(245, 158, 11, 0.3);">LUXURY ESCAPE</span>
+          <h3 id="vipDealModalTitle" style="font-size: 1.3rem; font-weight: 800; color: var(--secondary); margin-top: 4px;">VIP Deal Details</h3>
+        </div>
+        <button type="button" class="modal-close-btn" id="vipDealModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top: 0;">
+        <div style="position: relative; border-radius: 14px; overflow: hidden; margin-bottom: 1.25rem; height: 240px;">
+          <img id="vipDealModalImage" src="" alt="VIP Travel Package" style="width: 100%; height: 100%; object-fit: cover;">
+          <span id="vipDealModalDiscountBadge" class="card-badge" style="position: absolute; top: 12px; left: 12px; background: #ec4899; color: #fff;">SAVE 28%</span>
+          <span id="vipDealModalValidity" style="position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.7); color: #fff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.78rem;">Valid until Nov 30, 2026</span>
+        </div>
+
+        <p id="vipDealModalDesc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Package details description.
+        </p>
+
+        <!-- Transparent Price Comparison Box -->
+        <div class="vip-deal-price-calc" style="background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.88rem;">
+            <span style="color: var(--text-muted);">Standard Catalog Price:</span>
+            <span id="vipDealModalOrigPrice" style="text-decoration: line-through; color: var(--text-muted); font-weight: 600;">$1,850</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.88rem;">
+            <span style="color: #10b981; font-weight: 700;">Verified VIP Member Savings:</span>
+            <span id="vipDealModalSavings" style="color: #10b981; font-weight: 800;">-$520 (28% OFF)</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border); padding-top: 0.6rem; margin-top: 0.5rem;">
+            <span style="font-weight: 700; color: var(--secondary); font-size: 1rem;">Exclusive Package Price:</span>
+            <span id="vipDealModalDiscountedPrice" style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">$1,330</span>
+          </div>
+        </div>
+
+        <!-- Benefits Included -->
+        <div style="margin-bottom: 1.25rem;">
+          <h5 style="font-size: 0.9rem; font-weight: 700; color: var(--secondary); margin-bottom: 6px;">Included VIP Privileges</h5>
+          <ul id="vipDealModalBenefits" style="padding-left: 1.2rem; margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            <!-- Benefits items -->
+          </ul>
+        </div>
+
+        <!-- Eligibility Conditions -->
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #1e40af; text-transform: uppercase;">Eligibility &amp; Terms</div>
+          <div id="vipDealModalEligibility" style="font-size: 0.82rem; color: #1e3a8a; margin-top: 2px;">
+            Open to VoyageX Explorer, Plus &amp; Elite members. Flexible rebooking with 72h notice.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 1rem;">
+          <button type="button" class="btn btn-outline" id="btnSaveDealInModal" style="display: inline-flex; align-items: center; gap: 6px;">
+            <span>♡ Save Deal</span>
+          </button>
+          <div style="display: flex; gap: 0.5rem;">
+            <button type="button" class="btn btn-outline" id="btnVipDealModalClose">Cancel</button>
+            <button type="button" class="btn btn-accent" id="btnBookVipDealNow">Book This VIP Deal &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIP Membership Comparison Matrix Modal -->
+  <div class="modal-overlay" id="membershipModal" role="dialog" aria-modal="true" aria-labelledby="membershipModalTitle">
+    <div class="modal-card" style="max-width: 800px;">
+      <div class="modal-header">
+        <div>
+          <span class="section-tag" style="background: rgba(245, 158, 11, 0.15); color: #d97706; border-color: rgba(245, 158, 11, 0.3);">VoyageX Privileges</span>
+          <h3 id="membershipModalTitle" style="font-size: 1.35rem; font-weight: 800; color: var(--secondary); margin-top: 4px;">Compare VIP Membership Tiers</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Unlock exclusive flight discounts, lounge access, price freezes, and dedicated concierge.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="membershipModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top: 0;">
+        <div class="membership-matrix-grid">
+          <!-- Tier 1: Explorer -->
+          <div class="tier-card" id="tierCardExplorer">
+            <div class="tier-badge">FREE FOREVER</div>
+            <h4 class="tier-name">VoyageX Explorer</h4>
+            <div class="tier-price">$0 <span>/ year</span></div>
+            <p class="tier-tagline">Essential tools for smart, savvy travelers.</p>
+            <ul class="tier-features-list">
+              <li>✓ Flight &amp; Hotel Search</li>
+              <li>✓ Standard Customer Support</li>
+              <li>✓ Verified Community Reviews</li>
+              <li>✓ Basic Fare Price Alerts</li>
+              <li class="disabled">✗ Airport Lounge Access</li>
+              <li class="disabled">✗ 48-Hour Price Freeze ($15/ea)</li>
+              <li class="disabled">✗ Dedicated Travel Concierge</li>
+            </ul>
+            <button type="button" class="btn btn-outline tier-action-btn" id="btnSelectExplorerTier" onclick="window.selectMembershipTier('VoyageX Explorer')">
+              Current Plan
+            </button>
+          </div>
+
+          <!-- Tier 2: Plus -->
+          <div class="tier-card featured" id="tierCardPlus">
+            <div class="tier-badge" style="background: var(--primary); color: #fff;">MOST POPULAR</div>
+            <h4 class="tier-name">VoyageX Plus</h4>
+            <div class="tier-price">$99 <span>/ year (Demo)</span></div>
+            <p class="tier-tagline">Frequent flyers seeking savings &amp; airport comfort.</p>
+            <ul class="tier-features-list">
+              <li>✓ Everything in Explorer</li>
+              <li>✓ <strong>5% Extra Discount</strong> on VIP Deals</li>
+              <li>✓ <strong>2 Complimentary Lounge Passes</strong> / yr</li>
+              <li>✓ <strong>Free 48-Hour Price Freeze</strong></li>
+              <li>✓ Priority Boarding Coordination</li>
+              <li class="disabled">✗ 24/7 Dedicated Concierge</li>
+            </ul>
+            <button type="button" class="btn btn-primary tier-action-btn" id="btnSelectPlusTier" onclick="window.selectMembershipTier('VoyageX Plus')">
+              Upgrade to Plus (Demo)
+            </button>
+          </div>
+
+          <!-- Tier 3: Elite -->
+          <div class="tier-card" id="tierCardElite">
+            <div class="tier-badge" style="background: #ec4899; color: #fff;">ULTIMATE LUXURY</div>
+            <h4 class="tier-name">VoyageX Elite</h4>
+            <div class="tier-price">$299 <span>/ year (Demo)</span></div>
+            <p class="tier-tagline">Uncompromised luxury and white-glove treatment.</p>
+            <ul class="tier-features-list">
+              <li>✓ Everything in Plus</li>
+              <li>✓ <strong>15% Extra Discount</strong> across all Stays</li>
+              <li>✓ <strong>Unlimited VIP Lounge Access</strong> worldwide</li>
+              <li>✓ <strong>24/7 Dedicated Chauffeur &amp; Concierge</strong></li>
+              <li>✓ <strong>Zero Ticket Cancellation Fees</strong></li>
+              <li>✓ Guaranteed Room Upgrades on Arrival</li>
+            </ul>
+            <button type="button" class="btn btn-accent tier-action-btn" id="btnSelectEliteTier" onclick="window.selectMembershipTier('VoyageX Elite')">
+              Upgrade to Elite (Demo)
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-notice-box" style="margin-top: 1.5rem; text-align: left;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span>Academic demonstration mode: Tapping "Upgrade" simulates tier activation instantly on your VoyageX profile without real credit card billing.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Deals Modal -->
+  <div class="modal-overlay" id="savedDealsModal" role="dialog" aria-modal="true" aria-labelledby="savedDealsTitle">
+    <div class="modal-card" style="max-width: 640px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="savedDealsTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">My Saved Travel Deals</h3>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Bookmarked VIP Escapes &amp; Packages</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="savedDealsModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="savedDealsList" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Trips Dashboard Modal -->
+  <div class="modal-overlay" id="myTripsModal" role="dialog" aria-modal="true" aria-labelledby="tripsModalTitle">
+    <div class="modal-card" style="max-width: 640px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="tripsModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--secondary);">My Booked Itineraries</h3>
+          <span style="font-size: 0.82rem; color: var(--text-muted);">Live reservations linked to your VoyageX account</span>
+        </div>
+        <button type="button" class="modal-close-btn" id="myTripsModalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="myTripsList" style="display: flex; flex-direction: column; gap: 1rem;">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <span id="toastMsg">Action completed successfully</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>
